@@ -1,6 +1,7 @@
 package com.example.greenpotback.User;
 
 import com.example.greenpotback.Message.Message;
+import com.example.greenpotback.Post.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
@@ -17,7 +18,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="\"user\"")
+@Table(name = "\"user\"")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,19 +46,25 @@ public class User {
     private String description;
 
     @JsonIgnore
-    @OneToMany( mappedBy = "sender",
+    @OneToMany(mappedBy = "sender",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Message> sendMessages = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany( mappedBy = "receiver",
+    @OneToMany(mappedBy = "receiver",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
     private List<Message> receiveMessages = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "author",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Post> userPost = new ArrayList<>();
 
 }
 
