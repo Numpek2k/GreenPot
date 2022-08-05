@@ -31,6 +31,4 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "receiver_id")
     private User receiver;
-
-
 }

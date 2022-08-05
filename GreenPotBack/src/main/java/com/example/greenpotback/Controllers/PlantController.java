@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/post")
-public class PostController {
+@RequestMapping("/plant")
+public class PlantController {
 }
