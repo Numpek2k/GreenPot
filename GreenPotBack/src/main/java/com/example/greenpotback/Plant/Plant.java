@@ -1,5 +1,6 @@
 package com.example.greenpotback.Plant;
 
+import com.example.greenpotback.Plant.Calendar.Calendar;
 import com.example.greenpotback.Plant.Image.Image;
 import com.example.greenpotback.Plant.MainCategory.MainCategory;
 import com.example.greenpotback.Plant.SubCategory.SubCategory;
@@ -44,4 +45,9 @@ public class Plant {
             joinColumns = @JoinColumn(name = "plant_id"),
             inverseJoinColumns = @JoinColumn(name = "subCategory_id"))
     private List<SubCategory> subCategories = new ArrayList<>();
+
+    @OneToMany(mappedBy = "plant",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Calendar> calendar = new ArrayList<>();
 }
