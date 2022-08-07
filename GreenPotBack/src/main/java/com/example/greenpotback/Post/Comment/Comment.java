@@ -1,42 +1,34 @@
-package com.example.greenpotback.Post;
+package com.example.greenpotback.Post.Comment;
 
-import com.example.greenpotback.Post.Comment.Comment;
+import com.example.greenpotback.Post.Post;
 import com.example.greenpotback.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String title;
-
     private String content;
-
-    private String image;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    private User authorPost;
+    private User authorCom;
 
-    @OneToMany(mappedBy = "post",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private List<Comment> comments = new ArrayList<>();
-
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 }

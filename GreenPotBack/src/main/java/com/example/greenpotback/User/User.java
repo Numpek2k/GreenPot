@@ -1,6 +1,7 @@
 package com.example.greenpotback.User;
 
 import com.example.greenpotback.Message.Message;
+import com.example.greenpotback.Post.Comment.Comment;
 import com.example.greenpotback.Post.Post;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,14 +58,20 @@ public class User {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Message> receiveMessages = new ArrayList<>();
+    private List<Message> receivedMessages = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "author",
+    @OneToMany(mappedBy = "authorPost",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Post> userPost = new ArrayList<>();
+    private List<Post> usersPosts = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "authorCom",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Comment> usersComments = new ArrayList<>();
 
 }
 
