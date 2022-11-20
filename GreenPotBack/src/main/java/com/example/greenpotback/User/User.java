@@ -3,6 +3,7 @@ package com.example.greenpotback.User;
 import com.example.greenpotback.Message.Message;
 import com.example.greenpotback.Post.Comment.Comment;
 import com.example.greenpotback.Post.Post;
+import com.example.greenpotback.User.Role.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
@@ -46,6 +47,9 @@ public class User {
 
     private String description;
 
+    @ManyToOne
+    private Role role;
+
     @JsonIgnore
     @OneToMany(mappedBy = "sender",
             cascade = CascadeType.ALL,
@@ -72,6 +76,11 @@ public class User {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Comment> usersComments = new ArrayList<>();
+
+
+    public <T> void dump(T[] table){
+        for(T t: table) System.out.println(t);
+    }
 
 }
 
