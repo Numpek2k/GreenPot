@@ -1,6 +1,7 @@
 package com.example.greenpotback.User.Role;
 
 import com.example.greenpotback.User.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Role {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

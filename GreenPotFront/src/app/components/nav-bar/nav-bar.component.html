@@ -1,1 +1,44 @@
-<p>nav-bar works!</p>
+<nav class="shadow navbar navbar-expand-lg bg-secondary bg-opacity-10" *ngIf="isVisible()">
+  <div class="container-fluid">
+    <i class="bi bi-flower3 fs-3"></i>
+    <a href="" class="navbar-brand pacifico fs-3"><span class="text-success">Green</span>Pot</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#hamburgerMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="hamburgerMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+              <a class="dropdown-item">Action - 1</a>
+              <a class="dropdown-item">Another Action</a>
+              <span><hr class="dropdown-divider"></span>
+              <a class="dropdown-item">Something else is here</a>
+            </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
+      <div class="navbar-nav" role="search">
+        <div *ngIf="isLoggedIn(); else notLoggedIn">
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </div>
+
+        <ng-template #notLoggedIn>
+          <a routerLink="/register" class="nav-link" >Register</a>
+          <a routerLink="/login" class="nav-link" >Login</a>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+</nav>

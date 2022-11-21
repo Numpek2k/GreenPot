@@ -27,10 +27,6 @@ public class User {
     private Integer id;
 
     @NotNull
-    @Column(unique = true)
-    private String username;
-
-    @NotNull
     private String name;
 
     @NotNull
@@ -39,7 +35,7 @@ public class User {
     @NotNull
     @Email
     @Column(unique = true)
-    private String mail;
+    private String email;
 
     @NotNull
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

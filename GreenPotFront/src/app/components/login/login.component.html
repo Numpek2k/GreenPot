@@ -1,0 +1,27 @@
+<div class="shadow border container text-center mt-5 w-50">
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="col-12 col-md-9 col-lg-7 col-xl-8">
+      <form class="mt-3" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <i class="bi bi-flower3 fs-1"></i>
+        <a class="navbar-brand pacifico fs-1" href=""><span class="text-success">Green</span>Pot</a>
+        <div class="form-floating mt-4">
+          <input type="email" id="email" formControlName="email" class="form-control h2" placeholder="E-mail">
+          <label for="email">E-mail</label>
+          <div *ngIf="email.errors?.['email']">
+            This e-mail is incorrect
+          </div>
+        </div>
+        <div class="form-floating">
+          <input type="password" id="password" formControlName="password" class="form-control h2" placeholder="password">
+          <label for="password">Password</label>
+        </div>
+        <div *ngIf="incorrectCredentials" class="form-floating rounded err-color">
+          Incorrect credentials
+        </div>
+        <button type="submit" class="shadow btn btn-light mt-3 w-50 fs-4">Login</button>
+        <p class="text-center mt-4 mb-4"><a routerLink="/register" class="fw-bold text-body">
+          <u>Register here!</u></a></p>
+      </form>
+    </div>
+  </div>
+</div>
