@@ -35,7 +35,10 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     let cred = this.loginForm.value;
     this.userService.login(cred.email,cred.password).subscribe({
-      next: tokens => this.successfulLogin(tokens),
+      next: tokens => {
+        this.successfulLogin(tokens);
+        console.log("poszło do succesfullLogin");
+      },
       error: err => {
         if(err.status == 401){
           this.incorrectCredentials = true;

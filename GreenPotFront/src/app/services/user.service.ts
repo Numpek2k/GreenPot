@@ -17,12 +17,12 @@ export class UserService {
   user?:User;
 
   register(user: User): Observable<User> {
-    let url = BASE_URL + '/user/save';
+    let url = BASE_URL + '/auth/register';
     return this.http.post<User>(url, user);
   }
 
   login(email: string, password: string): Observable<Token> {
-    let url = BASE_URL + '/login';
+    let url = BASE_URL + '/auth/login';
 
     const body = new HttpParams()
       .set('email', email)

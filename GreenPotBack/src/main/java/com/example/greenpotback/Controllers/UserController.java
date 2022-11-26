@@ -19,12 +19,6 @@ public class UserController {
 
     private final UserServiceImp userServiceImp;
 
-    @PostMapping("/save")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/save").toUriString());
-        return ResponseEntity.created(uri).body(userServiceImp.saveUser(user));
-    }
-
     @GetMapping("/getcurrent")
     public ResponseEntity<User> findCurrentUser(Principal user) {
         log.info("USER: {}", user);

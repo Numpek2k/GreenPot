@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     role: ['patient', Validators.required]
   }, {validators: samePasswordValidator});
 
-  userExists = false;
+  errorMessage = "";
 
   ngOnInit(): void {
   }
@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
     this.userService.register(user)
       .subscribe({
         next: user => this.successfulRegister(user),
-        error: err => this.userExists = true
+        error: err => this.errorMessage = err.error.text
       });
   }
 

@@ -13,7 +13,7 @@ export class TokenService {
   constructor(private http: HttpClient,
               private router: Router) { }
 
-  setTokens(tokens: Token): void{
+  setTokens(tokens : Token): void{
     localStorage.setItem('access_token', tokens.access_token);
     localStorage.setItem('refresh_token', tokens.refresh_token);
   }
@@ -30,7 +30,7 @@ export class TokenService {
   }
 
   refresh() {
-    let url = BASE_URL + '/token/refresh';
+    let url = BASE_URL + '/auth/reftoken';
     let token = localStorage.getItem('refresh_token');
     if (!token) return;
     let exp = jwtDecode<{ [key: string]: string }>(token)['exp']
