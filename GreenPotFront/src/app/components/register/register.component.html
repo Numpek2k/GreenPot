@@ -5,14 +5,6 @@
         <i class="bi bi-flower3 fs-1"></i>
         <a class="navbar-brand pacifico fs-1" href=""><span class="text-success">Green</span>Pot</a>
         <div class="form-floating mt-4">
-          <input type="text" id="name" formControlName="name" class="form-control h2" placeholder="Name">
-          <label for="name">Name</label>
-        </div>
-        <div class="form-floating mt-2">
-          <input type="text" id="surname" formControlName="surname" class="form-control h2" placeholder="Surname">
-          <label for="surname">Surname</label>
-        </div>
-        <div class="form-floating mt-2">
           <input type="email" id="email" formControlName="email" class="form-control h2" placeholder="E-mail">
           <label for="email">E-mail</label>
           <div *ngIf="email.errors?.['email']">
@@ -25,13 +17,27 @@
           <div *ngIf="password.errors?.['minlength']">
             Password must have at least 8 characters
           </div>
+          <div *ngIf="password.errors?.['pattern']">
+            Make sure your password contains:<br>
+            - lower case<br>
+            - upper case<br>
+            - number
+          </div>
         </div>
-        <div class="form-floating">
+        <div class="form-floating mt-2">
           <input type="password" id="password-2" formControlName="password2" class="form-control h2" placeholder="Repeat password">
           <label for="password-2">Confirm password</label>
           <div *ngIf="registerForm.errors?.['notMatched']">
             Password should be identical
           </div>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="text" id="name" formControlName="name" class="form-control h2" placeholder="Name">
+          <label for="name">Name</label>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="text" id="surname" formControlName="surname" class="form-control h2" placeholder="Surname">
+          <label for="surname">Surname</label>
         </div>
         <div class="form-floating rounded err-color my-2">
           {{errorMessage}}

@@ -6,7 +6,6 @@ import com.example.greenpotback.Security.TokenProvider;
 import com.example.greenpotback.User.Role.RoleRepository;
 import com.example.greenpotback.User.User;
 import com.example.greenpotback.User.UserRepository;
-import org.aspectj.weaver.patterns.IToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,8 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/auth")

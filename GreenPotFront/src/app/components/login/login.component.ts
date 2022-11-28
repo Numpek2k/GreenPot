@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
     this.userService.login(cred.email,cred.password).subscribe({
       next: tokens => {
         this.successfulLogin(tokens);
-        console.log("poszło do succesfullLogin");
       },
       error: err => {
         if(err.status == 401){
@@ -50,7 +49,6 @@ export class LoginComponent implements OnInit {
   successfulLogin(tokens: Token) {
     this.tokenService.setTokens(tokens);
     this.userService.getCurrentUser();
-    this.router.navigate(['/']);
   }
 }
 

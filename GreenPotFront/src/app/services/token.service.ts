@@ -13,11 +13,6 @@ export class TokenService {
   constructor(private http: HttpClient,
               private router: Router) { }
 
-  setTokens(tokens : Token): void{
-    localStorage.setItem('access_token', tokens.access_token);
-    localStorage.setItem('refresh_token', tokens.refresh_token);
-  }
-
   getToken(): string | null{
     let token = localStorage.getItem('access_token');
     if (!token) return null;
@@ -29,12 +24,17 @@ export class TokenService {
     return token;
   }
 
+  setTokens(tokens : Token): void{
+    localStorage.setItem('access_token', tokens.access_token);
+    localStorage.setItem('refresh_token', tokens.refresh_token);
+  }
+
   refresh() {
     let url = BASE_URL + '/auth/reftoken';
     let token = localStorage.getItem('refresh_token');
     if (!token) return;
     let exp = jwtDecode<{ [key: string]: string }>(token)['exp']
-    if ((parseInt(exp) * 1000) - Date.now() < 500) {
+    if ((parseInt(exp) * 1000) - Date.now() < 1000) {
       this.logout()
       return;
     }
@@ -44,14 +44,6 @@ export class TokenService {
     }).subscribe(tokens => this.setTokens(tokens));
   }
 
-  isLoggedIn(): boolean{
-    return this.getToken() !== null;
-  }
-
-  logout(): void{
-    localStorage.clear();
-  }
-
   getAuthorizationHeader(): HttpHeaders{
     let token = this.getToken();
     if(!token) {
@@ -59,5 +51,13 @@ export class TokenService {
       throw Error('login first');
     }
     return new HttpHeaders().set('Authorization', token)
+  }
+
+  isLoggedIn(): boolean{
+    return this.getToken() !== null;
+  }
+
+  logout(): void{
+    localStorage.clear();
   }
 }

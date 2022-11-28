@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {samePasswordValidator} from "../../utility/checkPassword";
+import {samePasswordValidator} from "../../utility/passwordValidation";
 import {User} from "../../utility/user";
 import {UserService} from "../../services/user.service";
 import {TokenService} from "../../services/token.service";
@@ -21,39 +21,15 @@ export class RegisterComponent implements OnInit {
   registerForm = this.formBuilder.group({
     name: ['', [Validators.required]],
     surname: ['', [Validators.required]],
-    password: ['', {validators: [Validators.required, Validators.minLength(8)], updateOn: 'blur'}],
+    password: ['', {validators: [Validators.required, Validators.minLength(8),Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$")], updateOn: 'blur'}],
     password2: ['', {validators: Validators.required, updateOn: 'blur'}],
     email: ['', {validators: [Validators.email, Validators.required], updateOn: 'blur'}],
-    role: ['patient', Validators.required]
   }, {validators: samePasswordValidator});
 
   errorMessage = "";
 
   ngOnInit(): void {
   }
-
-
-  get name(){
-    return this.registerForm.controls['name']
-  }
-
-  get surname(){
-    return this.registerForm.controls['surname']
-  }
-
-  get email(){
-    return this.registerForm.controls['email']
-  }
-
-  get password(){
-    return this.registerForm.controls['password']
-  }
-
-  get password2(){
-    return this.registerForm.controls['password2']
-  }
-
-
 
   onSubmitRegister(): void{
     let user: User ={
@@ -73,6 +49,26 @@ export class RegisterComponent implements OnInit {
     this.userService.user = user;
     this.userService.login(user.email, this.password.value).subscribe(tokens => this.tokenService.setTokens(tokens))
     this.router.navigate(['/']);
+  }
+
+  get name(){
+    return this.registerForm.controls['name']
+  }
+
+  get surname(){
+    return this.registerForm.controls['surname']
+  }
+
+  get email(){
+    return this.registerForm.controls['email']
+  }
+
+  get password(){
+    return this.registerForm.controls['password']
+  }
+
+  get password2(){
+    return this.registerForm.controls['password2']
   }
 
 }
