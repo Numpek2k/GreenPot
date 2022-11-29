@@ -1,0 +1,20 @@
+
+.cls{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /*background-image: url("src/assets/background.jpeg");*/
+  background-color: ghostwhite;
+  min-width: 100%;
+  /*min-height: 100%;*/
+  /*-webkit-filter: blur(18px);*/
+  /*-o-filter: blur(18px);*/
+  /*filter: blur(15px);*/
+  z-index: -100;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
