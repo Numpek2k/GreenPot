@@ -2,6 +2,9 @@ package com.example.greenpotback.Plant.MainCategory;
 
 import com.example.greenpotback.Plant.Plant;
 import com.example.greenpotback.User.User;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +27,7 @@ public class MainCategory {
     @NotNull
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

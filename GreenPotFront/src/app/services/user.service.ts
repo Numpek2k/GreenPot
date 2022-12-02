@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {User} from "../utility/user";
+import {User} from "../models/user";
 import {Observable} from "rxjs";
 import {BASE_URL} from "../utility/globals";
-import {TokenService} from "./token.service";
-import {Token} from "../utility/token";
+import {Token} from "../models/token";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient,
-              private tokenService: TokenService) { }
+  constructor(private http: HttpClient) { }
 
   user?:User;
 
@@ -36,9 +34,7 @@ export class UserService {
 
   getCurrentUser(): Observable<User> {
     let url = BASE_URL + '/user/getcurrent';
-    let response = this.http.get<User>(url, {
-      headers: this.tokenService.getAuthorizationHeader()
-    });
+    let response = this.http.get<User>(url);
     response.subscribe(user => this.setUser(user))
     return response;
   }

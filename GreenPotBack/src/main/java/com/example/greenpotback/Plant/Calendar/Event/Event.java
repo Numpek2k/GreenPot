@@ -1,6 +1,9 @@
 package com.example.greenpotback.Plant.Calendar.Event;
 
 import com.example.greenpotback.Plant.Calendar.Calendar;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +26,7 @@ public class Event {
     @NotNull
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "event",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

@@ -5,4 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlantRepository extends JpaRepository<Plant, Integer> {
+
+    Plant findPlantById(Integer id);
+
 }

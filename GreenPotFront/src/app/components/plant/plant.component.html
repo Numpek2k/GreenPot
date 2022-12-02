@@ -2,7 +2,8 @@
   <div>
     <div id="imageCarousel" class="shadow carousel slide w-75 float-start" data-bs-ride="true">
       <div class="carousel-indicators">
-        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+        <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active"
+                aria-current="true"></button>
         <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="2"></button>
       </div>
@@ -29,51 +30,73 @@
     </div>
     <div class="carouselSize text-center w-25 float-end">
       <h6 class="mt-3">Plant category:</h6>
-      <span class="text-success">Perennials</span>
+      <span class="text-success">{{allData?.plant?.category?.name}}</span>
       <h6 class="mt-3">Plant sub-category:</h6>
-      <span class="text-success">Part Sun</span><br>
-      <span class="text-success">Alkaline Soil</span><br>
-      <span class="text-success">Blooming in summer</span><br>
-      <span class="text-success">Moist soil</span><br>
+      <span *ngFor="let subCat of allData?.subCategoriesList" class="text-success">{{subCat.name}}<br></span>
     </div>
-  </div>
-  <div class="w-75 dropdown-divider">
-  </div>
-  <div class="w-75 px-5 mt-4 text-justify pt-4 border-top border-dark">
-    <H2 class="pacifico text-success"> Tutaj jakaś nazwa rośliny</H2>
-    <div class="mt-4">
-      <h5>Subtitle asdasdasdsa</h5>
-      <span >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero est, semper in metus in, commodo porta mi. In scelerisque interdum mattis. Curabitur enim dui, molestie interdum mauris et, ultrices cursus est. Curabitur eget commodo risus. Nunc viverra mollis eleifend. Phasellus et urna nulla. Duis lobortis elit at aliquam tempor. Pellentesque quis velit luctus, tincidunt ligula eget, luctus enim. Etiam convallis orci odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
-      </span>
-    </div>
-    <div class="mt-4">
-      <h5>Subtitle asdasdasdsa</h5>
-      <span >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero est, semper in metus in, commodo porta mi. In scelerisque interdum mattis. Curabitur enim dui, molestie interdum mauris et, ultrices cursus est. Curabitur eget commodo risus. Nunc viverra mollis eleifend. Phasellus et urna nulla. Duis lobortis elit at aliquam tempor. Pellentesque quis velit luctus, tincidunt ligula eget, luctus enim. Etiam convallis orci odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
-      </span>
-    </div>
-    <div class="mt-4">
-      <h5>Subtitle asdasdasdsa</h5>
-      <span >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero est, semper in metus in, commodo porta mi. In scelerisque interdum mattis. Curabitur enim dui, molestie interdum mauris et, ultrices cursus est. Curabitur eget commodo risus. Nunc viverra mollis eleifend. Phasellus et urna nulla. Duis lobortis elit at aliquam tempor. Pellentesque quis velit luctus, tincidunt ligula eget, luctus enim. Etiam convallis orci odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
-      </span>
-    </div>
-
   </div>
 
-  <div class="w-75 px-5 mt-4 text-justify border-top border-1 border-dark">
-    <h5 class="row my-3 px-3">
-      Author: JANE DOE
-    </h5>
+  <div class="container">
     <div class="row">
-      <img src="assets/avatar.jpg" class="rounded-circle w-25 h-25 col-3 float-start" alt="...">
-      <div class="col-9">
-        tie interdum mauris et, ultrices cursus est. Curabitur eget commodo risus. Nunc viverra mollis eleifend. Phasellus et urna nulla. Duis lobortis elit at aliquam tempor. Pellentesque quis velit luctus, tincidunt ligula eget, luctus enim. Etiam convallis orci odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+      <div class="col-9 px-5 mt-4 text-justify pt-4 border-top border-dark">
+        <H2 class="pacifico text-success"> {{allData?.plant?.name}}</H2>
+        <div class="mt-4">
+          <h5>Subtitle asdasdasdsa</h5>
+          <span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero est, semper in metus in, commodo
+            porta mi. In scelerisque interdum mattis. Curabitur enim dui, molestie interdum mauris et, ultrices cursus
+            est. Curabitur eget commodo risus. Nunc viverra mollis eleifend. Phasellus et urna nulla.Duis lobortis
+            elit at aliquam tempor. Pellentesque quis velit luctus, tincidunt ligula eget, luctus enim. Etiam convallis
+            orci odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+          </span>
+        </div>
+        <div class="mt-4">
+          <h5>Subtitle asdasdasdsa</h5>
+          <span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero est, semper in metus in, commodo
+            porta mi. In scelerisque interdum mattis. Curabitur enim dui, molestie interdum mauris et, ultrices cursus
+            est. Curabitur eget commodo risus. Nunc viverra mollis eleifend. Phasellus et urna nulla. Duis lobortis
+            elit at aliquam tempor. Pellentesque quis velit luctus, tincidunt ligula eget, luctus enim. Etiam convallis
+            orci odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+          </span>
+        </div>
+        <div class="mt-4">
+          <h5>Subtitle asdasdasdsa</h5>
+          <span>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris libero est, semper in metus in, commodo
+            porta mi. In scelerisque interdum mattis. Curabitur enim dui, molestie interdum mauris et, ultrices cursus
+            est. Curabitur eget commodo risus. Nunc viverra mollis eleifend. Phasellus et urna nulla. Duis lobortis
+            elit at aliquam tempor. Pellentesque quis velit luctus, tincidunt ligula eget, luctus enim. Etiam convallis
+            orci odio. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+          </span>
+        </div>
+      </div>
+
+      <div class="col-3 text-center px-5 mt-4 pt-4 border-top border-dark">
+        <h5> Calender: </h5>
+        <div *ngFor="let calendar of allData?.calendarList">
+          <h6 class="mt-2 pt-2 border-top">{{calendar.event.name}}</h6>
+          Since: <span class="text-success">{{calendar.dateStart}}</span><br>
+          To: <span class="text-success">{{calendar.dateEnd}}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="w-75 px-5 mt-4 text-justify border-top border-1 border-dark">
+      <h5 class="row my-3 px-3">
+        Author: {{allData?.plant?.author?.name}} {{allData?.plant?.author?.surname}}
+      </h5>
+      <div class="row">
+        <img src="assets/avatar.jpg" class="rounded-circle w-25 h-25 col-3 float-start" alt="...">
+        <div class="col-9">
+          {{allData?.plant?.author?.description}}
+        </div>
       </div>
     </div>
 
   </div>
+
 </div>
 
 

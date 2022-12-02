@@ -1,6 +1,8 @@
 package com.example.greenpotback.User;
 
 import com.example.greenpotback.Message.Message;
+import com.example.greenpotback.Plant.Plant;
+import com.example.greenpotback.Plant.SubCategory.SubCategory;
 import com.example.greenpotback.Post.Comment.Comment;
 import com.example.greenpotback.Post.Post;
 import com.example.greenpotback.User.Role.Role;
@@ -41,6 +43,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @Column(length = 4095)
     private String description;
 
     @ManyToOne
@@ -73,10 +76,19 @@ public class User {
             fetch = FetchType.LAZY)
     private List<Comment> usersComments = new ArrayList<>();
 
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "observed",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "plant_id"))
+    private List<Plant> observedPlant = new ArrayList<>();
 
-    public <T> void dump(T[] table){
-        for(T t: table) System.out.println(t);
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "author",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Plant> createdPlant = new ArrayList<>();
 
 }
 

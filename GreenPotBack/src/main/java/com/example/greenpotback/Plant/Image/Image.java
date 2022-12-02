@@ -1,6 +1,9 @@
 package com.example.greenpotback.Plant.Image;
 
 import com.example.greenpotback.Plant.Plant;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

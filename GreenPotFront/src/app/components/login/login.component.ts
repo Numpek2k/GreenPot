@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
-import {Token} from "../../utility/token";
+import {Token} from "../../models/token";
 import {TokenService} from "../../services/token.service";
 
 @Component({
@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
   successfulLogin(tokens: Token) {
     this.tokenService.setTokens(tokens);
     this.userService.getCurrentUser();
+    this.router.navigate(['/']);
   }
 }
 

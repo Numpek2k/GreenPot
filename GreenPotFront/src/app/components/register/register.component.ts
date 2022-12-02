@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {samePasswordValidator} from "../../utility/passwordValidation";
-import {User} from "../../utility/user";
+import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {TokenService} from "../../services/token.service";
 

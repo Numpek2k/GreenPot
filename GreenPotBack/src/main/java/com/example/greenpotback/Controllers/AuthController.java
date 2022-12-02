@@ -71,6 +71,7 @@ public class AuthController {
 
         if(authHeader != null && authHeader.startsWith(SecurityConst.JWT_TOKEN_TYPE)){
             String refreshToken = authHeader.substring(SecurityConst.JWT_TOKEN_TYPE.length());
+            tokenProvider.validateToken(refreshToken);
 
             String email = tokenProvider.getEmailFromJWT(refreshToken);
             String accessToken = tokenProvider.generateAccessToken(email);
