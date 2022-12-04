@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlantService} from "../../services/plant.service";
 import {PlantAllDataDto} from "../../dto/plantAllDataDto";
+import {BASE_URL} from "../../utility/globals";
 
 @Component({
   selector: 'app-plant',
@@ -16,8 +17,10 @@ export class PlantComponent implements OnInit {
 
   private id: any;
   allData?: PlantAllDataDto;
+  baseUrl: any;
 
   ngOnInit(): void {
+    this.baseUrl=BASE_URL
 
     this.id = this.route.snapshot.paramMap.get('id');
     if(!Number.isInteger(parseInt(this.id))) {

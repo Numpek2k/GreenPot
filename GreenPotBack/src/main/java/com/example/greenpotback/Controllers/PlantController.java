@@ -3,6 +3,7 @@ package com.example.greenpotback.Controllers;
 import com.example.greenpotback.Dto.PlantAllDataDto;
 import com.example.greenpotback.Plant.Calendar.Calendar;
 import com.example.greenpotback.Plant.Image.Image;
+import com.example.greenpotback.Plant.MainCategory.MainCategory;
 import com.example.greenpotback.Plant.Plant;
 import com.example.greenpotback.Plant.PlantServiceImp;
 import com.example.greenpotback.Plant.SubCategory.SubCategory;
@@ -23,12 +24,55 @@ public class PlantController {
 
     private final PlantServiceImp plantService;
 
-    @GetMapping("/all-info/id")
-    public ResponseEntity<PlantAllDataDto> getAllDataById(Integer id){
+//    PLANT
+    @GetMapping("/info/id")
+    public ResponseEntity<PlantAllDataDto> getPlantAllDataById(Integer id){
+
+        if(plantService.findPlantByID(id) == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(collectData(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<PlantAllDataDto>> getAllPlants(){
+        List<Plant> plants = plantService.getAllPlants();
+        List<PlantAllDataDto> allPlants = new ArrayList<>();
+
+        for(Plant plant : plants){
+            allPlants.add(collectData(plant.getId()));
+        }
+
+        return new ResponseEntity<>(allPlants,HttpStatus.OK);
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<List<PlantAllDataDto>> getPlantByCategory(String category){
+        List<Plant> plants = plantService.getPlantsByCategory(category);
+        List<PlantAllDataDto> allPlants = new ArrayList<>();
+
+        for(Plant plant : plants){
+            allPlants.add(collectData(plant.getId()));
+        }
+
+        return new ResponseEntity<>(allPlants,HttpStatus.OK);
+    }
+
+//    MAIN_CATEGORY
+    @GetMapping("/main-category/all")
+    public ResponseEntity<List<MainCategory>> getAllMainCategories(){
+        return new ResponseEntity<>(plantService.findAllMainCategory(),HttpStatus.OK);
+    }
+
+//    SUB_CATEGORY
+    @GetMapping("/sub-category/all")
+    public ResponseEntity<List<SubCategory>> getAllSubCategory(){
+        return new ResponseEntity<>(plantService.findAllSubCategory(),HttpStatus.OK);
+    }
+
+
+
+
+    private PlantAllDataDto collectData(Integer id){
         Plant plant = plantService.findPlantByID(id);
-
-        if(plant == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
         List<Image> images = plantService.findAllImagesByPlantId(id);
 
         for(Image image : images){
@@ -41,9 +85,7 @@ public class PlantController {
         allCollectedData.setImagesList((ArrayList<Image>) images);
         allCollectedData.setCalendarList((ArrayList<Calendar>) plantService.findAllCalendarByPlantId(id));
 
-        return new ResponseEntity<>(allCollectedData,HttpStatus.OK);
+        return allCollectedData;
     }
-
-
 
 }

@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -30,8 +31,20 @@ public class Plant {
     @NotNull
     private String name;
 
-    @Column(length = 16383)
+    @Column(length = 4095)
     private String description;
+
+    @Column(length = 4095)
+    private String requirements;
+
+    @Column(length = 4095)
+    private String planting;
+
+    @Column(length = 4095)
+    private String growing;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date = new Date();
 
     @ManyToOne
     @JoinColumn(name = "category_id")

@@ -1,3 +1,15 @@
 .carouselSize{
   height: 33vw;
 }
+
+.calendarBG{
+  background-color: #ddb892;
+}
+
+.eventBG{
+  background-color: #e6ccb2;
+}
+
+.dateBG{
+  background-color: #ede0d4;
+}

@@ -4,6 +4,8 @@ import com.example.greenpotback.Plant.Calendar.Calendar;
 import com.example.greenpotback.Plant.Calendar.CalendarRepository;
 import com.example.greenpotback.Plant.Image.Image;
 import com.example.greenpotback.Plant.Image.ImageRepository;
+import com.example.greenpotback.Plant.MainCategory.MainCategory;
+import com.example.greenpotback.Plant.MainCategory.MainCategoryRepository;
 import com.example.greenpotback.Plant.SubCategory.SubCategory;
 import com.example.greenpotback.Plant.SubCategory.SubCategoryRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,8 @@ public class PlantServiceImp implements PlantService {
 
     private final PlantRepository plantRepository;
 
+    private final MainCategoryRepository mainCategoryRepository;
+
     private final SubCategoryRepository subCategoryRepository;
 
     private final ImageRepository imageRepository;
@@ -27,6 +31,26 @@ public class PlantServiceImp implements PlantService {
     @Override
     public Plant findPlantByID(Integer id) {
         return plantRepository.findPlantById(id);
+    }
+
+    @Override
+    public List<Plant> getAllPlants() {
+        return plantRepository.findAll();
+    }
+
+    @Override
+    public List<Plant> getPlantsByCategory(String category) {
+        return plantRepository.findAllByCategoryName(category);
+    }
+
+    @Override
+    public List<MainCategory> findAllMainCategory() {
+        return mainCategoryRepository.findAll();
+    }
+
+    @Override
+    public List<SubCategory> findAllSubCategory() {
+        return subCategoryRepository.findAll();
     }
 
     @Override

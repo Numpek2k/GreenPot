@@ -2,6 +2,6 @@ import {Plant} from "./plant";
 
 export interface Image{
   id: number;
-  file: string;
+  filePath: string;
   plant: Plant;
 }

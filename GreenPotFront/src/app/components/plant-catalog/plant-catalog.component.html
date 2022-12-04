@@ -1,0 +1,50 @@
+<div class="container bg-white my-5 rounded-3 shadow">
+  <div class="row fs-5 text-justify ">
+    <h2 class="border-bottom border-dark pb-2 mt-2"> Plant Catalog </h2>
+    <span>
+      Find the most popular species and varieties of plants for the garden in our catalog.
+      Check out detailed descriptions and practical tips on their requirements and cultivation and care.
+    </span>
+  </div>
+  <div class="row justify-content-around border-bottom py-4 px-1 px-md-4">
+
+    <input  (click)="changePlantCategory('all')" type="radio" class="btn-check" name="options-outlined" id="all" autocomplete="off" checked>
+    <label class="btn btn-outline-success col-5 col-md-2 m-2" for="all">All</label>
+
+    <ng-template ngFor let-cat [ngForOf]="mainCategories">
+      <input  (click)="changePlantCategory(cat.name)" type="radio" class="btn-check" name="options-outlined" id="{{cat?.name}}<" autocomplete="off">
+      <label class="btn btn-outline-success col-5 col-md-2 m-2" for="{{cat?.name}}<">{{cat?.name}}</label>
+    </ng-template>
+
+<!--    <button (click)="changePlantCategory('all')" type="button" class="btn btn-outline-success col-5 col-md-2 m-2"> All </button>-->
+<!--    <button *ngFor="let cat of mainCategories" (click)="changePlantCategory(cat.name)" type="button" class="btn btn-outline-success col-5 col-md-2 m-2">-->
+<!--      {{cat?.name}}-->
+<!--    </button>-->
+
+  </div>
+  <div class="row my-4">
+
+    <div class="col-md-3 col-12 border-end">
+      <form>
+        <ng-template ngFor let-cat [ngForOf]="subCategories">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="{{cat?.name}}">
+            <label class="form-check-label" for="{{cat?.name}}">
+              {{cat?.name}}
+            </label>
+          </div>
+
+        </ng-template>
+        <div class="w-100 d-flex justify-content-end ">
+          <button class="btn btn-success me-3">Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-12 col-md-9">
+      <ng-template ngFor let-plant [ngForOf]="allPlant">
+        <app-card-holder-plant [allData]="plant"></app-card-holder-plant>
+      </ng-template>
+    </div>
+  </div>
+</div>

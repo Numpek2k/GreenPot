@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { PlantComponent } from './components/plant/plant.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {TokenInterceptorService} from "./interceptors/token-interceptor.service";
+import { CardHolderPlantComponent } from './components/card-holder-plant/card-holder-plant.component';
+import { PlantCatalogComponent } from './components/plant-catalog/plant-catalog.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import {TokenInterceptorService} from "./interceptors/token-interceptor.service"
     RegisterComponent,
     LoginComponent,
     PlantComponent,
-    FooterComponent
+    FooterComponent,
+    CardHolderPlantComponent,
+    PlantCatalogComponent
   ],
   imports: [
     BrowserModule,
