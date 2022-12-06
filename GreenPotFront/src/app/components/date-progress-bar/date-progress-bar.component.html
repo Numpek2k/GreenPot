@@ -1,0 +1,22 @@
+<div class="row justify-content-center accordion-body">
+  <ng-template ngFor let-cal [ngForOf]="calendar">
+    <h3 class="w-100 text-center mt-4"> {{cal.event.name}} </h3>
+    <div class="col-12 col-md-10 border-bottom pb-2 overflow-visible">
+      <div class="progress bg-white ">
+        <div class="progress-bar bg-white text-dark overflow-visible"
+             [ngStyle]="{'margin-left': 'calc('+percent[cal.id].startDate+'% - 15px)','width': '32px'}">{{cal.dateStart}}</div>
+        <div class="progress-bar bg-white text-dark overflow-visible"
+             [ngStyle]="{'margin-left': 'calc( '+percent[cal.id].endDate+'% - '+percent[cal.id].startDate+'% - 31px)','width': '32px'}">{{cal.dateEnd}}</div>
+      </div>
+      <div class="progress d-grid " style="height: 25px;">
+        <div [ngClass]="percent[cal.id].isInRange ? 'progress-bar bg-success' : 'progress-bar bg-secondary'" role="progressbar" aria-label="Success example"
+             [ngStyle]="{'margin-left': percent[cal.id].startDate+'%','width': 'calc( '+percent[cal.id].endDate+'% - '+percent[cal.id].startDate+'% )'}"></div>
+        <div class="progress-bar bg-danger" role="progressbar" aria-label="Success example" style="margin-left: {{todayPercentage}}%; width: 3px"></div>
+      </div>
+      <div class="progress bg-white">
+        <div class="progress-bar bg-white text-dark" [ngStyle]="{'margin-left': 'calc('+todayPercentage+'% - 16px)','width': '32px'}">Today</div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+

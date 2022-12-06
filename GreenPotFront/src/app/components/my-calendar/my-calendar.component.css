@@ -1,0 +1,6 @@
+.accordion{
+  --bs-accordion-active-color: #198754;
+  --bs-accordion-active-bg: #e8fff3;
+  --bs-accordion-btn-focus-border-color: none;
+  --bs-accordion-btn-focus-box-shadow: none;
+}

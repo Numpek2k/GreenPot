@@ -25,7 +25,7 @@
       </button>
 
     </div>
-    <div class="text-sm-end col-md-3 col-12 mt-3 mt-md-0 fs-6">
+    <div class="text-sm-end col-md-3 col-12 mt-3 mt-md-0 fs-6 ps-2 pe-3">
       <div class="calendarBG rounded-3 shadow p-3 w-100">
         <ul class="list-group list-group-flush eventBG rounded-3 px-2 shadow ">
           <li class="list-group-item text-sm-start mt-3 h5 eventBG">Plant category:</li>
@@ -43,6 +43,7 @@
     <div class="row">
       <div class="col-md-9 col-12 px-5 mt-4 text-justify pt-4 border-top border-dark">
         <h1 class="pacifico text-success"> {{allData?.plant?.name}}</h1>
+        <app-button-follow></app-button-follow>
         <div class="mt-4">
           <h3>Description</h3>
           <span>
@@ -68,7 +69,7 @@
           </span>
         </div>
       </div>
-      <div class="col-md-3 col-12 text-center pt-4 fs-6">
+      <div class="col-md-3 col-12 text-center pt-4 fs-6 pe-1">
         <div class="shadow calendarBG p-4 rounded-3 w-100">
           <h4> Calender: </h4>
           <div class="shadow eventBG pb-2 px-2 rounded-3" *ngFor="let calendar of allData?.calendarList">
@@ -88,8 +89,8 @@
         Author: {{allData?.plant?.author?.name}} {{allData?.plant?.author?.surname}}
       </h5>
       <div class="row">
-        <img src="assets/avatar.jpg" class="rounded-circle w-25 h-25 col-3 float-start" alt="...">
-        <div class="col-9">
+        <img src="assets/avatar.jpg" class="rounded-circle aspect-ratio col-md-3 col-12 px-0" alt="...">
+        <div class="col-md-9 col-12">
           {{allData?.plant?.author?.description}}
         </div>
       </div>

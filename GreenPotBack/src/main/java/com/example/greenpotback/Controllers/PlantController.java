@@ -1,5 +1,6 @@
 package com.example.greenpotback.Controllers;
 
+import com.example.greenpotback.Dto.MyCalendarDTO;
 import com.example.greenpotback.Dto.PlantAllDataDto;
 import com.example.greenpotback.Plant.Calendar.Calendar;
 import com.example.greenpotback.Plant.Image.Image;
@@ -12,9 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -27,9 +31,10 @@ public class PlantController {
 //    PLANT
     @GetMapping("/info/id")
     public ResponseEntity<PlantAllDataDto> getPlantAllDataById(Integer id){
+        Plant plant = plantService.findPlantByID(id);
 
-        if(plantService.findPlantByID(id) == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(collectData(id),HttpStatus.OK);
+        if(plant == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(plantService.collectAllData(plant),HttpStatus.OK);
     }
 
     @GetMapping("/all")
@@ -38,7 +43,7 @@ public class PlantController {
         List<PlantAllDataDto> allPlants = new ArrayList<>();
 
         for(Plant plant : plants){
-            allPlants.add(collectData(plant.getId()));
+            allPlants.add(plantService.collectAllData(plant));
         }
 
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
@@ -50,7 +55,33 @@ public class PlantController {
         List<PlantAllDataDto> allPlants = new ArrayList<>();
 
         for(Plant plant : plants){
-            allPlants.add(collectData(plant.getId()));
+            allPlants.add(plantService.collectAllData(plant));
+        }
+
+        return new ResponseEntity<>(allPlants,HttpStatus.OK);
+    }
+
+    @GetMapping("/sub-cat")
+    public ResponseEntity<List<PlantAllDataDto>> getPlantBySubCategory(@RequestParam("category") List<String> category){
+//        List<String> convertedToList = Arrays.asList(category.split(",", -1));
+        List<Plant> plants = plantService.getPlantsBySubCategory(category);
+        List<PlantAllDataDto> allPlants = new ArrayList<>();
+
+        for(Plant plant : plants){
+            allPlants.add(plantService.collectAllData(plant));
+        }
+
+        return new ResponseEntity<>(allPlants,HttpStatus.OK);
+    }
+
+    @GetMapping("/my-calendar")
+    public ResponseEntity<List<MyCalendarDTO>> getCalendarInfoByObserved(Principal user){
+        List<Plant> plants = plantService.getMyCalenderByEmail(user.getName());
+
+        List<MyCalendarDTO> allPlants = new ArrayList<>();
+
+        for(Plant plant : plants){
+            allPlants.add(plantService.collectMyCalendar(plant));
         }
 
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
@@ -66,26 +97,6 @@ public class PlantController {
     @GetMapping("/sub-category/all")
     public ResponseEntity<List<SubCategory>> getAllSubCategory(){
         return new ResponseEntity<>(plantService.findAllSubCategory(),HttpStatus.OK);
-    }
-
-
-
-
-    private PlantAllDataDto collectData(Integer id){
-        Plant plant = plantService.findPlantByID(id);
-        List<Image> images = plantService.findAllImagesByPlantId(id);
-
-        for(Image image : images){
-            image.setFilePath(ControllerConst.PLANT_IMAGES_PATH + id + "/" + image.getFilePath());
-        }
-
-        PlantAllDataDto allCollectedData = new PlantAllDataDto();
-        allCollectedData.setPlant(plant);
-        allCollectedData.setSubCategoriesList((ArrayList<SubCategory>) plantService.findAllSubCatByPlantId(id));
-        allCollectedData.setImagesList((ArrayList<Image>) images);
-        allCollectedData.setCalendarList((ArrayList<Calendar>) plantService.findAllCalendarByPlantId(id));
-
-        return allCollectedData;
     }
 
 }

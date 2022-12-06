@@ -1,5 +1,8 @@
 package com.example.greenpotback.Plant;
 
+import com.example.greenpotback.Controllers.ControllerConst;
+import com.example.greenpotback.Dto.MyCalendarDTO;
+import com.example.greenpotback.Dto.PlantAllDataDto;
 import com.example.greenpotback.Plant.Calendar.Calendar;
 import com.example.greenpotback.Plant.Calendar.CalendarRepository;
 import com.example.greenpotback.Plant.Image.Image;
@@ -12,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,6 +48,16 @@ public class PlantServiceImp implements PlantService {
     }
 
     @Override
+    public List<Plant> getPlantsBySubCategory(List<String> subCat) {
+        return plantRepository.findAllBySubCategoriesNameIn(subCat);
+    }
+
+    @Override
+    public List<Plant> getMyCalenderByEmail(String email) {
+        return plantRepository.findAllByObserversEmail(email);
+    }
+
+    @Override
     public List<MainCategory> findAllMainCategory() {
         return mainCategoryRepository.findAll();
     }
@@ -65,6 +79,34 @@ public class PlantServiceImp implements PlantService {
 
     @Override
     public List<Calendar> findAllCalendarByPlantId(Integer id) {
-        return calendarRepository.findAllByPlantId(id);
+        return calendarRepository.findAllByPlantIdOrderByDateStart(id);
+    }
+
+    @Override
+    public PlantAllDataDto collectAllData(Plant plant){
+        int id = plant.getId();
+        List<Image> images = findAllImagesByPlantId(id);
+
+        for(Image image : images){
+            image.setFilePath(ControllerConst.PLANT_IMAGES_PATH + id + "/" + image.getFilePath());
+        }
+
+        PlantAllDataDto allCollectedData = new PlantAllDataDto();
+        allCollectedData.setPlant(plant);
+        allCollectedData.setSubCategoriesList(findAllSubCatByPlantId(id));
+        allCollectedData.setImagesList(images);
+        allCollectedData.setCalendarList(findAllCalendarByPlantId(id));
+
+        return allCollectedData;
+    }
+
+    @Override
+    public MyCalendarDTO collectMyCalendar(Plant plant) {
+
+        MyCalendarDTO allCollectedData = new MyCalendarDTO();
+        allCollectedData.setPlant(plant);
+        allCollectedData.setCalendarList(findAllCalendarByPlantId(plant.getId()));
+
+        return allCollectedData;
     }
 }

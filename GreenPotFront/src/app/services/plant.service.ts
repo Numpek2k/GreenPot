@@ -4,6 +4,7 @@ import {PlantAllDataDto} from "../dto/plantAllDataDto";
 import {Observable} from "rxjs";
 import {BASE_URL} from "../utility/globals";
 import {Plant} from "../models/plant";
+import {MyCalendarDTO} from "../dto/MyCalendarDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,20 @@ export class PlantService {
     return this.http.get<PlantAllDataDto[]>(url)
   }
 
+  getMyCalender(): Observable<MyCalendarDTO[]>{
+    let url = this.baseUrl + '/my-calendar'
+    return this.http.get<MyCalendarDTO[]>(url)
+  }
+
   getPlantByMainCategory(category: string):Observable<PlantAllDataDto[]>{
     let url = this.baseUrl + '/category'
     let httpParams = new HttpParams().set('category',category)
+    return this.http.get<PlantAllDataDto[]>(url,{params: httpParams})
+  }
+
+  getPlantBySubCategory(categories: string){
+    let url = this.baseUrl + '/sub-cat'
+    let httpParams = new HttpParams().set('category',categories)
     return this.http.get<PlantAllDataDto[]>(url,{params: httpParams})
   }
 }

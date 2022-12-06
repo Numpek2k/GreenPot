@@ -13,6 +13,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import {TokenInterceptorService} from "./interceptors/token-interceptor.service";
 import { CardHolderPlantComponent } from './components/card-holder-plant/card-holder-plant.component';
 import { PlantCatalogComponent } from './components/plant-catalog/plant-catalog.component';
+import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
+import { DateProgressBarComponent } from './components/date-progress-bar/date-progress-bar.component';
+import { ButtonFollowComponent } from './components/button-follow/button-follow.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { PlantCatalogComponent } from './components/plant-catalog/plant-catalog.
     PlantComponent,
     FooterComponent,
     CardHolderPlantComponent,
-    PlantCatalogComponent
+    PlantCatalogComponent,
+    MyCalendarComponent,
+    DateProgressBarComponent,
+    ButtonFollowComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PlantService} from "../../services/plant.service";
 import {PlantAllDataDto} from "../../dto/plantAllDataDto";
 import {BASE_URL} from "../../utility/globals";
+import {Calendar} from "../../models/calendar";
 
 @Component({
   selector: 'app-plant',
@@ -30,10 +31,19 @@ export class PlantComponent implements OnInit {
 
 
     this.plantService.getAllDataPlantById(parseInt(this.id)).subscribe({
-      next: data => this.allData = data,
+      next: value => {
+        for(let cal of value.calendarList)
+          this.trimDates(cal)
+        this.allData = value
+      },
       error: err => this.router.navigate(["/"])
     });
 
+  }
+
+  trimDates(calendar: Calendar) {
+    calendar.dateStart = calendar.dateStart.substring(5, 10)
+    calendar.dateEnd = calendar.dateEnd.substring(5, 10)
   }
 
 }

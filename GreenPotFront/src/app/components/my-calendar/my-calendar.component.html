@@ -1,0 +1,20 @@
+<div class="container bg-white my-4 rounded-2 shadow">
+  <h2 class="pacifico text-decoration-underline col-12 text-center mb-4 pt-4">My Calendar</h2>
+  <div class="row justify-content-center">
+    <div class="accordion pb-4 col-8" id="plantCalendar">
+      <ng-template ngFor let-plant [ngForOf]="myCalendar" >
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="{{'header'+plant?.plant?.id}}">
+              <button class="accordion-button collapsed fs-4" type="button" data-bs-toggle="collapse" attr.data-bs-target="#{{'plant'+plant?.plant?.id}}" aria-expanded="true" attr.aria-controls="{{'plant'+plant?.plant?.id}}">
+                {{plant.plant.name}}
+              </button>
+            </h2>
+            <div id="{{'plant'+plant?.plant?.id}}" class="accordion-collapse collapse" attr.aria-labelledby="{{'header'+plant?.plant?.id}}" data-bs-parent="#plantCalendar">
+              <button type="button" class="btn btn-outline-success offset-lg-10 offset-lg-6 offset-3 offset-sm-4 mt-3" routerLink="/plant/{{plant?.plant?.id}}">About Plant</button>
+              <app-date-progress-bar [calendar]="plant.calendarList"></app-date-progress-bar>
+            </div>
+          </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

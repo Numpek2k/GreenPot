@@ -13,3 +13,16 @@
 .dateBG{
   background-color: #ede0d4;
 }
+
+.aspect-ratio{
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 764px) {
+  .fs-5{
+    font-size: 0.8rem !important;
+  }
+}
