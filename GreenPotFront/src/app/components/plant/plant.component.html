@@ -41,11 +41,10 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-md-9 col-12 px-5 mt-4 text-justify pt-4 border-top border-dark">
+      <div class="col-md-9 col-12 px-0 px-md-5 mt-4 text-justify pt-4 border-top border-dark">
         <h1 class="pacifico text-success"> {{allData?.plant?.name}}</h1>
-        <app-button-follow></app-button-follow>
+        <app-button-follow [plantId]="id"></app-button-follow>
         <div class="mt-4">
-          <h3>Description</h3>
           <span>
             {{allData?.plant?.description}}
           </span>
@@ -84,7 +83,7 @@
 
     </div>
 
-    <div class="w-75 px-5 mt-4 text-justify border-top border-1 border-dark">
+    <div class="w-75 px-0 px-md-5 mt-4 text-justify border-top border-1 border-dark">
       <h5 class="row my-3 px-3">
         Author: {{allData?.plant?.author?.name}} {{allData?.plant?.author?.surname}}
       </h5>

@@ -22,6 +22,8 @@ public interface PlantService {
 
     List<Plant> getMyCalenderByEmail(String email);
 
+    List<Plant> getPlantsByAuthor(Integer id);
+
 //    MAIN_CATEGORY
 
     List<MainCategory> findAllMainCategory();
@@ -33,6 +35,8 @@ public interface PlantService {
 //    IMAGE
 
     List<Image> findAllImagesByPlantId(Integer id);
+    Image getImageByPlantIdLimit(Integer id);
+
 //    CALENDAR
 
     List<Calendar> findAllCalendarByPlantId(Integer id);

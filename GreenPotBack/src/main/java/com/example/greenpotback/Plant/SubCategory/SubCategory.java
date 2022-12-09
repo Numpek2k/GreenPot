@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -28,5 +30,5 @@ public class SubCategory {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "subCategories")
-    private List<Plant> plants = new ArrayList<>();
+    private Set<Plant> plants = new HashSet<>();
 }

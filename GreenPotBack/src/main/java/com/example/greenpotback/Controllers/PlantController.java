@@ -49,6 +49,11 @@ public class PlantController {
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
     }
 
+    @GetMapping("/by-author")
+    public ResponseEntity<List<Plant>> getPlantByAuthor(@RequestParam Integer id){
+        return new ResponseEntity<>(plantService.getPlantsByAuthor(id),HttpStatus.OK);
+    }
+
     @GetMapping("/category")
     public ResponseEntity<List<PlantAllDataDto>> getPlantByCategory(String category){
         List<Plant> plants = plantService.getPlantsByCategory(category);
@@ -74,6 +79,7 @@ public class PlantController {
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
     }
 
+//    CALENDAR
     @GetMapping("/my-calendar")
     public ResponseEntity<List<MyCalendarDTO>> getCalendarInfoByObserved(Principal user){
         List<Plant> plants = plantService.getMyCalenderByEmail(user.getName());
@@ -97,6 +103,13 @@ public class PlantController {
     @GetMapping("/sub-category/all")
     public ResponseEntity<List<SubCategory>> getAllSubCategory(){
         return new ResponseEntity<>(plantService.findAllSubCategory(),HttpStatus.OK);
+    }
+
+//    IMAGE
+    @GetMapping("/image-by-plant-id")
+    public ResponseEntity<Image> getImageByPlantId(@RequestParam Integer id){
+        Image image = plantService.getImageByPlantIdLimit(id);
+        return new ResponseEntity<>(image,HttpStatus.OK);
     }
 
 }

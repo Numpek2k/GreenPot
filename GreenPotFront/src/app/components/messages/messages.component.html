@@ -1,0 +1,24 @@
+<div >
+  <div class="overflow-auto" style="max-height: 75vh">
+    <ng-template ngFor let-message [ngForOf]="messages">
+      <div *ngIf="compareUser(message.sender)" class="rounded-4 bg-secondary bg-opacity-25 col-8 mt-3 shadow-sm border-top border-dark">
+        <div class="px-3 my-1 text-justify">{{message.content}}</div>
+      </div>
+      <div *ngIf="!compareUser(message.sender)" class="rounded-4 bg-light offset-4 col-8 mt-3 shadow-sm border-top">
+        <div class="px-3 my-1">{{message.content}}</div>
+      </div>
+
+    </ng-template>
+  </div>
+
+  <div class="row d-flex position-absolute bottom-0 start-0 end-0 pb-2">
+    <div class="position-relative bottom-0 start-50 translate-middle-x col-11">
+      <form [formGroup]="messageForm" (ngSubmit)="onSendMessage(id)">
+        <div class="input-group">
+          <input type="text" class="form-control bg-secondary bg-opacity-10 col-11 " formControlName="content" placeholder="Send a message...">
+          <button class="btn bg-success bg-opacity-100 text-white" type="submit"><i class="bi bi-send-fill"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

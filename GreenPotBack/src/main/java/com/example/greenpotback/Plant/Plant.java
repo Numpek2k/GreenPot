@@ -8,17 +8,14 @@ import com.example.greenpotback.User.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -59,12 +56,12 @@ public class Plant {
     private List<Image> images = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "plant_sub_category",
             joinColumns = @JoinColumn(name = "plant_id"),
             inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
-    private List<SubCategory> subCategories = new ArrayList<>();
+    private Set<SubCategory> subCategories = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "plant",
@@ -73,8 +70,8 @@ public class Plant {
     private List<Calendar> calendar = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "observedPlant")
-    private List<User> observers = new ArrayList<>();
+    @ManyToMany(mappedBy = "observedPlant",fetch = FetchType.LAZY)
+    private Set<User> observers = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "author")

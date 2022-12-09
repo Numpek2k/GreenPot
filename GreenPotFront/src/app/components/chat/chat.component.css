@@ -1,0 +1,23 @@
+.message-people{
+  height: 83vh;
+  overflow: auto;
+}
+
+.text-overflow{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.aspect-ratio{
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.overflow-auto::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+

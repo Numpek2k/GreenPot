@@ -16,6 +16,11 @@ import { PlantCatalogComponent } from './components/plant-catalog/plant-catalog.
 import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
 import { DateProgressBarComponent } from './components/date-progress-bar/date-progress-bar.component';
 import { ButtonFollowComponent } from './components/button-follow/button-follow.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CardPlantProfileComponent } from './components/card-plant-profile/card-plant-profile.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { PlantFormComponent } from './components/plant-form/plant-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,12 @@ import { ButtonFollowComponent } from './components/button-follow/button-follow.
     PlantCatalogComponent,
     MyCalendarComponent,
     DateProgressBarComponent,
-    ButtonFollowComponent
+    ButtonFollowComponent,
+    ProfileComponent,
+    CardPlantProfileComponent,
+    ChatComponent,
+    MessagesComponent,
+    PlantFormComponent
   ],
   imports: [
     BrowserModule,

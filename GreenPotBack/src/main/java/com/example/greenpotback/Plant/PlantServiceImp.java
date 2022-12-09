@@ -58,6 +58,11 @@ public class PlantServiceImp implements PlantService {
     }
 
     @Override
+    public List<Plant> getPlantsByAuthor(Integer id) {
+        return plantRepository.findAllByAuthorId(id);
+    }
+
+    @Override
     public List<MainCategory> findAllMainCategory() {
         return mainCategoryRepository.findAll();
     }
@@ -75,6 +80,13 @@ public class PlantServiceImp implements PlantService {
     @Override
     public List<Image> findAllImagesByPlantId(Integer id) {
         return imageRepository.findImagesByPlantId(id);
+    }
+
+    @Override
+    public Image getImageByPlantIdLimit(Integer id) {
+        Image image = imageRepository.getFirstImageByPlantId(id);
+        image.setFilePath(ControllerConst.PLANT_IMAGES_PATH + id + "/" + image.getFilePath());
+        return image;
     }
 
     @Override

@@ -24,6 +24,7 @@ public class Image {
     @NotNull
     private String filePath;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "plant_id")
     private Plant plant;

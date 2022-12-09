@@ -16,7 +16,7 @@ export class PlantComponent implements OnInit {
               private plantService: PlantService,
               private router: Router) { }
 
-  private id: any;
+  id: any;
   allData?: PlantAllDataDto;
   baseUrl: any;
 

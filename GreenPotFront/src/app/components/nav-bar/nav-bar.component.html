@@ -18,13 +18,19 @@
         </li>
       </ul>
       <div class="navbar-nav d-flex">
-        <div class="d-flex" *ngIf="isLoggedIn(); else notLoggedIn">
+        <div class="d-md-flex" *ngIf="isLoggedIn(); else notLoggedIn">
           <a class="nav-link active" aria-current="page" routerLink="/calendar" >MyCalendar</a>
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Profile
+              <img src="assets/avatar.jpg" class="rounded-circle aspect-ratio" alt="...">
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
+              <a class="dropdown-item" routerLink="/profile/{{user}}">My Profile</a>
+              <a class="dropdown-item" routerLink="/chat">Chat</a>
+              <hr class="dropdown-divider">
+              <a class="dropdown-item">Add Plant</a>
+              <a class="dropdown-item">Add Post</a>
+              <hr class="dropdown-divider">
               <a class="dropdown-item" (click)="logout()">Logout</a>
             </div>
           </li>

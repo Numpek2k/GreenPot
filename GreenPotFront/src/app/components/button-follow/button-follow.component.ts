@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-button-follow',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ButtonFollowComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
+
+  @Input() plantId!: number;
+  isFav: any;
 
   ngOnInit(): void {
+    this.userService.isUserFollowingPlant(this.plantId).subscribe({
+      next: value => this.isFav = value
+    })
   }
+
+  public toggleSelected() {
+    if(this.isFav){
+      this.userService.unFollowPlant(this.plantId).subscribe({
+       next: value => this.isFav = value
+      })
+    }
+    else{
+      this.userService.followPlant(this.plantId).subscribe({
+        next: value => this.isFav = value
+      })
+    }
+  }
+
+
 
 }

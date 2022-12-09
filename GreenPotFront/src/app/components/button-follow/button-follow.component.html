@@ -1,1 +1,4 @@
-<button type="button" class="btn btn-outline-danger mt-2">Follow <span class="bi bi-heart"></span> </button>
+<button (click)="toggleSelected()" type="button" class="btn btn-outline-danger mt-2">
+  <span *ngIf="!isFav" >Fav <span class="bi bi-heart-fill"></span></span>
+  <span *ngIf="isFav" >unFav <span class="bi bi-heart"></span></span>
+</button>

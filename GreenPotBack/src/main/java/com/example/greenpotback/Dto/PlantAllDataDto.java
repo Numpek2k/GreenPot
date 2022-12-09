@@ -7,11 +7,12 @@ import com.example.greenpotback.Plant.SubCategory.SubCategory;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class PlantAllDataDto {
     Plant plant;
-    ArrayList<SubCategory> subCategoriesList;
-    ArrayList<Image> imagesList;
-    ArrayList<Calendar> calendarList;
+    List<SubCategory> subCategoriesList;
+    List<Image> imagesList;
+    List<Calendar> calendarList;
 }
