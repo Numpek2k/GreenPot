@@ -7,6 +7,7 @@ import {PlantCatalogComponent} from "./components/plant-catalog/plant-catalog.co
 import {MyCalendarComponent} from "./components/my-calendar/my-calendar.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {ChatComponent} from "./components/chat/chat.component";
+import {PlantFormComponent} from "./components/plant-form/plant-form.component";
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'calendar',component: MyCalendarComponent},
   {path: 'profile/:id',component: ProfileComponent},
   {path: 'chat',component: ChatComponent},
+  {path: 'add-plant',component: PlantFormComponent},
   // { path: '', redirectTo: '/something', pathMatch: 'full' }
   // { path: '', component:  }
 ];

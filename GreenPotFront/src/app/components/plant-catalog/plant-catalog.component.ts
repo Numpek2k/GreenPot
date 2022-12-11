@@ -7,7 +7,7 @@ import {SubCategory} from "../../models/subCategory";
 
 
 interface filterSubCat{
-  id:number
+  id?:number
   name:string;
   checked?:boolean;
 }
@@ -22,12 +22,6 @@ export class PlantCatalogComponent implements OnInit {
 
   constructor(private categoryService: CategoriesService,
               private plantService: PlantService) { }
-
-  options = [
-    {name:'OptionA', value:'1', checked:true},
-    {name:'OptionB', value:'2', checked:false},
-    {name:'OptionC', value:'3', checked:true}
-  ]
 
   mainCategories?: Category[]
   allPlant?: PlantAllDataDto[]

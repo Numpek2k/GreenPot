@@ -1,5 +1,5 @@
 
-export interface SubCategory{
+export interface Events {
   id?: number;
   name: string;
 }

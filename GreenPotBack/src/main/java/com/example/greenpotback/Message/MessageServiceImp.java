@@ -34,11 +34,7 @@ public class MessageServiceImp implements MessageService {
     @Override
     public List<User> getAllReceivers(Principal user) {
         User u = userService.getCurrentUser(user);
-        List<Integer> usersId = messageRepository.findReceiverDistinctBySender(u);
-        List<User> users = new ArrayList<>();
-        for(int id: usersId)
-            users.add(userRepository.findUserById(id));
-        return users;
+        return messageRepository.findReceiverDistinctBySender(u);
     }
 
     @Override

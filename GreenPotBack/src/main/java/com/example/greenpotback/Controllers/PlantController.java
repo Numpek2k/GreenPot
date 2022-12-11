@@ -3,6 +3,7 @@ package com.example.greenpotback.Controllers;
 import com.example.greenpotback.Dto.MyCalendarDTO;
 import com.example.greenpotback.Dto.PlantAllDataDto;
 import com.example.greenpotback.Plant.Calendar.Calendar;
+import com.example.greenpotback.Plant.Calendar.Event.Event;
 import com.example.greenpotback.Plant.Image.Image;
 import com.example.greenpotback.Plant.MainCategory.MainCategory;
 import com.example.greenpotback.Plant.Plant;
@@ -11,10 +12,8 @@ import com.example.greenpotback.Plant.SubCategory.SubCategory;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -79,6 +78,18 @@ public class PlantController {
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
     }
 
+
+    @PostMapping("/save")
+    public ResponseEntity<Integer> savePlant(@RequestBody Plant plant,Principal user){
+        return new ResponseEntity<>(plantService.savePlant(plant,user),HttpStatus.CREATED);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadPhoto(@RequestBody MultipartFile file,@RequestParam Integer id){
+        plantService.uploadPhoto(file,id);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 //    CALENDAR
     @GetMapping("/my-calendar")
     public ResponseEntity<List<MyCalendarDTO>> getCalendarInfoByObserved(Principal user){
@@ -91,6 +102,12 @@ public class PlantController {
         }
 
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
+    }
+
+//    EVENT
+    @GetMapping("/event/all")
+    public ResponseEntity<List<Event>> getAllEvent(){
+        return new ResponseEntity<>(plantService.findAllEvent(),HttpStatus.OK);
     }
 
 //    MAIN_CATEGORY

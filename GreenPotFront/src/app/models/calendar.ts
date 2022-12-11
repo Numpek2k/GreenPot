@@ -1,10 +1,10 @@
 import {Plant} from "./plant";
-import {Event} from "./event";
+import {Events} from "./events";
 
 export interface Calendar{
   id: number;
   dateStart: string;
   dateEnd: string;
   plant: Plant;
-  event: Event;
+  event: Events;
 }

@@ -21,6 +21,7 @@ import { CardPlantProfileComponent } from './components/card-plant-profile/card-
 import { ChatComponent } from './components/chat/chat.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { PlantFormComponent } from './components/plant-form/plant-form.component';
+import { PostFormComponent } from './components/post-form/post-form.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PlantFormComponent } from './components/plant-form/plant-form.component
     CardPlantProfileComponent,
     ChatComponent,
     MessagesComponent,
-    PlantFormComponent
+    PlantFormComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@ export class CardPlantProfileComponent implements OnInit {
   baseUrl = BASE_URL
 
   ngOnInit(): void {
+    if(!this.plant.id) return;
     this.plantService.getImageByPlantIdLimit1(this.plant.id).subscribe({
       next: value => this.image = value
     })

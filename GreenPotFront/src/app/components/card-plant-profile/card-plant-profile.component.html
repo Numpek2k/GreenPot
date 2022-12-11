@@ -3,7 +3,7 @@
     <img src="{{baseUrl + image?.filePath}}" class="card-img-top mt-2" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{plant.name}}</h5>
-      <p class="card-text"><span class="h6">Category:</span> {{plant.category.name}} <a href="#" class="btn btn-outline-success float-end">More...</a></p>
+      <p class="card-text"><span class="h6">Category:</span> {{plant.category.name}} <a routerLink="/plant/{{plant.id}}" class="btn btn-outline-success float-end">More...</a></p>
     </div>
   </div>
 </div>

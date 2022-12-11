@@ -5,16 +5,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer> {
 
-    @Query(value = "select receiver_id, max(ids.date) as max from (select receiver_id,date from message " +
-            "where sender_id =4 union select sender_id,date from message as m " +
-            "where receiver_id = 4 order by date desc) as ids group by receiver_id order by max desc",
-            nativeQuery = true)
-    List<Integer> findReceiverDistinctBySender(User user);
+    @Query(value = "select distinct case when m.sender = ?1 then m.receiver else m.sender " +
+            "end as comb, max(m.date) as maxx from Message as m where ?1 in (m.sender, m.receiver) " +
+            "group by comb order by maxx desc")
+    List<User> findReceiverDistinctBySender(User user);
 
 //    select distinct receiver_id from message where sender_id =4 union
 //    select distinct sender_id from message as m where receiver_id = 4

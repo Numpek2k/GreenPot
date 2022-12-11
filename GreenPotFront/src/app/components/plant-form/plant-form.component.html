@@ -1,1 +1,159 @@
-<p>plant-form works!</p>
+<div class="container bg-white my-5 rounded-3 shadow pb-4">
+  <div class="row fs-5 text-justify">
+    <h2 class="border-bottom border-dark pb-2 mt-2"> Add plant : </h2>
+    <span>
+      Below is a form to add a plant to our database.
+      Make sure all fields are filled in and the data provided is verified.
+    </span>
+  </div>
+  <form class="mt-4 border-top" [formGroup]="plantAddForm" (ngSubmit)="onSubmitForm()">
+    <div class="row mt-4">
+      <div class="col-md-4 offset-md-2">
+        <div class="form-floating">
+          <input type="text" id="plant-name" class="form-control h2" placeholder="Plant name" formControlName="name">
+          <label for="plant-name">Plant name</label>
+          <div class="mb-1 ms-2" *ngIf="name.errors?.['minlength']">
+            Name is too short
+          </div>
+          <div class="mb-1 ms-2" *ngIf="name.errors?.['maxlength']">
+            Name is too long
+          </div>
+          <div class="mb-1 ms-2" *ngIf="name.errors?.['required']">
+            This field is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <div class="form-floating">
+          <textarea id="description" class="form-control h2" placeholder="Description..." formControlName="description"></textarea>
+          <label for="description">Description...</label>
+          <div class="mb-1 ms-2" *ngIf="description.errors?.['minlength']">
+            Content is too short
+          </div>
+          <div class="mb-1 ms-2" *ngIf="description.errors?.['maxlength']">
+            Content is too long
+          </div>
+          <div class="mb-1 ms-2" *ngIf="description.errors?.['required']">
+            This field is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <div class="form-floating">
+          <textarea id="requirements" class="form-control h2" placeholder="Requirements..." formControlName="requirements"></textarea>
+          <label for="requirements">Requirements...</label>
+          <div class="mb-1 ms-2" *ngIf="requirements.errors?.['minlength']">
+            Content is too short
+          </div>
+          <div class="mb-1 ms-2" *ngIf="requirements.errors?.['maxlength']">
+            Content is too long
+          </div>
+          <div class="mb-1 ms-2" *ngIf="requirements.errors?.['required']">
+            This field is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <div class="form-floating">
+          <textarea id="planting" class="form-control h2" placeholder="Planting..." formControlName="planting"></textarea>
+          <label for="planting">Planting...</label>
+          <div class="mb-1 ms-2" *ngIf="planting.errors?.['minlength']">
+            Content is too short
+          </div>
+          <div class="mb-1 ms-2" *ngIf="planting.errors?.['maxlength']">
+            Content is too long
+          </div>
+          <div class="mb-1 ms-2" *ngIf="planting.errors?.['required']">
+            This field is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <div class="form-floating">
+          <textarea id="growing" class="form-control h2" placeholder="Growing..." formControlName="growing"></textarea>
+          <label for="growing">Growing...</label>
+          <div class="mb-1 ms-2" *ngIf="growing.errors?.['minlength']">
+            Content is too short
+          </div>
+          <div class="mb-1 ms-2" *ngIf="growing.errors?.['maxlength']">
+            Content is too long
+          </div>
+          <div class="mb-1 ms-2" *ngIf="growing.errors?.['required']">
+            This field is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 offset-md-2">
+        <div class="form-floating">
+          <select class="form-select" id="mainCategory" formControlName="mainCategory">
+            <option disabled selected> -- select an option -- </option>
+            <option *ngFor="let cat of mainCategories" value="{{cat?.name}}">{{cat?.name}}</option>
+          </select>
+          <label for="mainCategory">Choose one main category</label>
+          <div class="mb-1 ms-2" *ngIf="mainCategory.errors?.['required']">
+            This field is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 overflow-auto border rounded-3" style="max-height: 130px">
+        Sub categories:
+        <div class="mb-1 ms-2" *ngIf="subCategories.errors?.['minlength']">
+          Choose at least 2 sub categories
+        </div>
+        <ng-template ngFor let-cat [ngForOf]="subCatArray">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="{{cat.name}}" name="{{cat.name}}"
+                   value="{{cat.name}}" (change)="onSubCatChange($event)">
+            <label class="form-check-label" for="{{cat.name}}">
+              {{cat.name}}
+            </label>
+          </div>
+        </ng-template>
+      </div>
+      <div class="col-md-4 offset-md-2 overflow-auto border rounded-3" style="max-height: 130px">
+        Events:
+        <ng-template ngFor let-ev [ngForOf]="eventArray">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="{{ev.name}}" name="{{ev.name}}"
+                   value="{{ev.name}}" (change)="onEventChange($event)">
+            <label class="form-check-label" for="{{ev.name}}">
+              {{ev.name}}
+            </label>
+          </div>
+        </ng-template>
+      </div>
+      <div *ngFor="let val of plantAddForm.get('events')?.value" class="col-md-8 offset-md-2 border mt-2 rounded-3">
+        <h6 class="mt-2">{{val}}:</h6>
+          <label class="ms-2" for="{{val}}Start">From: </label>
+          <input class="form-control w-50" type="date" id="{{val}}Start" min="{{currYear}}-01-01" max="{{currYear}}-12-31">
+          <label class="ms-2" for="{{val}}End">To: </label>
+          <input class="form-control w-50 mb-2" type="date" id="{{val}}End" min="{{currYear}}-01-01" max="{{currYear}}-12-31">
+      </div>
+    </div>
+    <div class="offset-md-2 col-md-8 my-3">
+      <label for="formFile" class="form-label">Multiple files input example</label>
+      <input class="form-control" accept=".png,.jpg,.jpeg" type="file" id="formFile" (change)="selectFiles($event)" multiple>
+
+      <div *ngFor="let progressInfo of progressInfos" class="offset-md-2 col-md-8 my-2">
+        <span>{{ progressInfo.fileName }}</span>
+        <div class="progress">
+          <div
+            class="progress-bar progress-bar-info progress-bar-striped"
+            role="progressbar"
+            attr.aria-valuenow="{{ progressInfo.value }}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [ngStyle]="{ width: progressInfo.value + '%' }"
+          >
+            {{ progressInfo.value }}%
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-light" role="alert">{{ errorMessage }}</div>
+    </div>
+    <div class="row offset-md-2">
+      <button type="submit" class="shadow btn btn-outline-success mt-3 fs-4 col-md-2">Add Plant</button>
+    </div>
+  </form>
+
+</div>

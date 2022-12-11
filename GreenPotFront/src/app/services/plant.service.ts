@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpParams, HttpRequest} from "@angular/common/http";
 import {PlantAllDataDto} from "../dto/plantAllDataDto";
 import {Observable} from "rxjs";
 import {BASE_URL} from "../utility/globals";
 import {Plant} from "../models/plant";
 import {MyCalendarDTO} from "../dto/MyCalendarDTO";
 import {Image} from "../models/image";
+import {Events} from "../models/events";
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,32 @@ export class PlantService {
     let url = this.baseUrl + '/image-by-plant-id'
     let httpParams = new HttpParams().set('id',id)
     return this.http.get<Image>(url,{params: httpParams})
+  }
+
+  getAllEvents(): Observable<Events[]>{
+    let url = this.baseUrl + '/event/all'
+    return this.http.get<Events[]>(url)
+  }
+
+  upload(file: File,id: number): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    let url = this.baseUrl + '/upload';
+
+    formData.append('file', file);
+    let httpParams = new HttpParams().set('id',id);
+
+    const req = new HttpRequest('POST', url, formData, {
+      reportProgress: true,
+      responseType: 'json',
+      params: httpParams
+    });
+
+
+    return this.http.request(req);
+  }
+
+  savePlant(plant: Plant): Observable<number> {
+    let url = this.baseUrl + '/save'
+    return this.http.post<number>(url,plant)
   }
 }
