@@ -94,6 +94,11 @@ public class PlantServiceImp implements PlantService {
     }
 
     @Override
+    public List<Plant> getLatestPostWithLimit() {
+        return plantRepository.findFirst5ByOrderByDateDesc();
+    }
+
+    @Override
     public void uploadPhoto(MultipartFile file, Integer id) {
         Path uploadPath = Paths.get(ControllerConst.PLANT_IMAGE_SAVE_PATH + id);
         Image img = new Image();
@@ -114,7 +119,7 @@ public class PlantServiceImp implements PlantService {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        img.setFilePath(ControllerConst.PLANT_IMAGES_PATH+fileName);
+        img.setFilePath(ControllerConst.PLANT_IMAGES_PATH + id + '/' + fileName);
         img.setPlant(plantRepository.findPlantById(id));
 
         imageRepository.save(img);
@@ -143,7 +148,7 @@ public class PlantServiceImp implements PlantService {
     @Override
     public Image getImageByPlantIdLimit(Integer id) {
         Image image = imageRepository.getFirstImageByPlantId(id);
-        image.setFilePath(ControllerConst.PLANT_IMAGES_PATH + id + "/" + image.getFilePath());
+        image.setFilePath(image.getFilePath());
         return image;
     }
 
@@ -161,11 +166,6 @@ public class PlantServiceImp implements PlantService {
     public PlantAllDataDto collectAllData(Plant plant){
         int id = plant.getId();
         List<Image> images = findAllImagesByPlantId(id);
-
-        for(Image image : images){
-            image.setFilePath(ControllerConst.PLANT_IMAGES_PATH + id + "/" + image.getFilePath());
-        }
-
         PlantAllDataDto allCollectedData = new PlantAllDataDto();
         allCollectedData.setPlant(plant);
         allCollectedData.setSubCategoriesList(findAllSubCatByPlantId(id));

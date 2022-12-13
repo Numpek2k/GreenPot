@@ -22,6 +22,13 @@ import { ChatComponent } from './components/chat/chat.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { PlantFormComponent } from './components/plant-form/plant-form.component';
 import { PostFormComponent } from './components/post-form/post-form.component';
+import { PostContainerComponent } from './components/post-container/post-container.component';
+import { CardHolderPostComponent } from './components/card-holder-post/card-holder-post.component';
+import { PostComponent } from './components/post/post.component';
+import { CardPostProfileComponent } from './components/card-post-profile/card-post-profile.component';
+import { HomeComponent } from './components/home/home.component';
+import {CommentCardHolderComponent} from "./components/comment-card-holder/comment-card-holder.component";
+// import { AgmCoreModule } from '@agm/core'
 
 @NgModule({
   declarations: [
@@ -41,7 +48,13 @@ import { PostFormComponent } from './components/post-form/post-form.component';
     ChatComponent,
     MessagesComponent,
     PlantFormComponent,
-    PostFormComponent
+    PostFormComponent,
+    PostContainerComponent,
+    CardHolderPostComponent,
+    PostComponent,
+    CommentCardHolderComponent,
+    CardPostProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +62,10 @@ import { PostFormComponent } from './components/post-form/post-form.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'GOOGLE API KEY',
+    //   libraries: ['places']
+    // })
   ],
   providers: [
     {

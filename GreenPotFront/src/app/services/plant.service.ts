@@ -7,6 +7,7 @@ import {Plant} from "../models/plant";
 import {MyCalendarDTO} from "../dto/MyCalendarDTO";
 import {Image} from "../models/image";
 import {Events} from "../models/events";
+import {Post} from "../models/post";
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,11 @@ export class PlantService {
   getAllPlants(): Observable<PlantAllDataDto[]>{
     let url = this.baseUrl + '/all'
     return this.http.get<PlantAllDataDto[]>(url)
+  }
+
+  getLatestPlantWithLimit():Observable<Plant[]>{
+    let url = this.baseUrl + '/latest-limit'
+    return this.http.get<Plant[]>(url);
   }
 
   getMyCalender(): Observable<MyCalendarDTO[]>{
@@ -76,7 +82,6 @@ export class PlantService {
       responseType: 'json',
       params: httpParams
     });
-
 
     return this.http.request(req);
   }

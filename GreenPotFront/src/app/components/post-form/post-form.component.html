@@ -1,0 +1,61 @@
+<div class="container bg-white my-5 rounded-3 shadow pb-4">
+  <div class="row fs-5 text-justify">
+    <h2 class="border-bottom border-dark pb-2 mt-2"> Add post : </h2>
+    <span>
+      Below is a form to add a post to our database.
+      Make sure all fields are filled in and the data provided is verified.
+      You can add your own custom subtitles.
+    </span>
+    <form class="mt-4 border-top" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <div class="row mt-4">
+        <div class="col-md-4 offset-md-2 mb-2">
+          <div class="form-floating">
+            <input type="text" id="title" class="form-control h2" placeholder="Title" formControlName="title">
+            <label for="title">Title</label>
+          </div>
+          <button type="button" (click)="addQuantity()" class="btn btn-outline-dark">Add paragraph</button>
+        </div>
+        <div formArrayName="contentArray">
+          <div class="border-top" *ngFor="let quantity of contentArray().controls; let i=index" [formGroupName]="i">
+            <div class="col-md-4 offset-md-2 mt-2">
+              <button (click)="removeQuantity(i)" class="btn btn-outline-danger mb-2">Remove</button>
+              <div class="form-floating">
+                <input type="text" id="subTit{{i}}" class="form-control h2" placeholder="Title" formControlName="subTitle">
+                <label for="subTit{{i}}">SubTitle</label>
+              </div>
+            </div>
+            <div class="col-md-7 offset-md-2 mt-2">
+              <div class="form-floating">
+                <textarea type="text" id="content{{i}}" class="form-control h2" placeholder="Title" formControlName="content"> </textarea>
+                <label for="content{{i}}">Content</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 offset-md-2 my-3">
+            <label for="formFile" class="form-label">Single files input</label>
+            <input class="form-control" accept=".png,.jpg,.jpeg" type="file" id="formFile" (change)="selectFile($event)">
+          <div *ngFor="let progressInfo of progressInfos" class="offset-md-2 col-md-8 my-2">
+            <span>{{ progressInfo.fileName }}</span>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                attr.aria-valuenow="{{ progressInfo.value }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                [ngStyle]="{ width: progressInfo.value + '%' }"
+              >
+                {{ progressInfo.value }}%
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-light" role="alert">{{ errorMessage }}</div>
+        </div>
+      </div>
+      <div class="row offset-md-2">
+        <button type="submit" class="shadow btn btn-outline-success mt-3 fs-4 col-md-2">Add Plant</button>
+      </div>
+    </form>
+  </div>
+</div>

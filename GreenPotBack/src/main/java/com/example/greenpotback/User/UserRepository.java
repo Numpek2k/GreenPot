@@ -17,7 +17,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     Boolean existsAllByEmailAndObservedPlantId(String email, Integer id);
     @Query("select u from User u where u.id = ?1")
     User findUserById(Integer id);
-
     @Query("select u from User u where u.id in ?1")
     List<User> findAllUserByIdIn(List<Integer> id);
 

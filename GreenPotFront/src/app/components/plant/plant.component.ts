@@ -18,11 +18,9 @@ export class PlantComponent implements OnInit {
 
   id: any;
   allData?: PlantAllDataDto;
-  baseUrl: any;
+  baseUrl = BASE_URL;
 
   ngOnInit(): void {
-    this.baseUrl=BASE_URL
-
     this.id = this.route.snapshot.paramMap.get('id');
     if(!Number.isInteger(parseInt(this.id))) {
       this.router.navigate(["/"])

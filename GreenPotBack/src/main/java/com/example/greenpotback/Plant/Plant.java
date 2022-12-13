@@ -7,6 +7,7 @@ import com.example.greenpotback.Plant.SubCategory.SubCategory;
 import com.example.greenpotback.User.User;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -47,7 +48,7 @@ public class Plant {
     @JoinColumn(name = "category_id")
     private MainCategory category;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(
             mappedBy = "plant",
             cascade = CascadeType.ALL,
@@ -55,15 +56,16 @@ public class Plant {
     )
     private List<Image> images = new ArrayList<>();
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinTable(
             name = "plant_sub_category",
             joinColumns = @JoinColumn(name = "plant_id"),
             inverseJoinColumns = @JoinColumn(name = "sub_category_id"))
     private Set<SubCategory> subCategories = new HashSet<>();
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "plant",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

@@ -29,17 +29,19 @@ public interface PlantService {
 
     Integer savePlant(Plant plant, Principal user);
 
-    void uploadPhoto(MultipartFile file, Integer id);
+    List<Plant> getLatestPostWithLimit();
 
+    void uploadPhoto(MultipartFile file, Integer id);
 //    MAIN_CATEGORY
+
     List<MainCategory> findAllMainCategory();
 
 //    SUB_CATEGORY
-
     List<SubCategory> findAllSubCategory();
-    List<SubCategory> findAllSubCatByPlantId(Integer id);
 
+    List<SubCategory> findAllSubCatByPlantId(Integer id);
 //    IMAGE
+
     List<Image> findAllImagesByPlantId(Integer id);
 
     Image getImageByPlantIdLimit(Integer id);
@@ -57,5 +59,4 @@ public interface PlantService {
     PlantAllDataDto collectAllData(Plant plant);
 
     MyCalendarDTO collectMyCalendar(Plant plant);
-
 }

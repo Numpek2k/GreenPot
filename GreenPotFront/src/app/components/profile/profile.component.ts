@@ -5,6 +5,7 @@ import {User} from "../../models/user";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Plant} from "../../models/plant";
 import {Post} from "../../models/post";
+import {PostService} from "../../services/post.service";
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +16,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private userService: UserService,
               private plantService: PlantService,
+              private postService: PostService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -48,6 +50,11 @@ export class ProfileComponent implements OnInit {
         }
       }
     })
+
+    this.postService.getPostByAuthor(this.id).subscribe({
+      next: value => this.posts = value
+    })
+
   }
 
 

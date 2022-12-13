@@ -9,6 +9,7 @@ import com.example.greenpotback.Plant.MainCategory.MainCategory;
 import com.example.greenpotback.Plant.Plant;
 import com.example.greenpotback.Plant.PlantServiceImp;
 import com.example.greenpotback.Plant.SubCategory.SubCategory;
+import com.example.greenpotback.Post.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +65,12 @@ public class PlantController {
 
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
     }
+
+    @GetMapping("/latest-limit")
+    public ResponseEntity<List<Plant>> getLatestPostWithLimit(){
+        return new ResponseEntity<>(plantService.getLatestPostWithLimit(),HttpStatus.OK);
+    }
+
 
     @GetMapping("/sub-cat")
     public ResponseEntity<List<PlantAllDataDto>> getPlantBySubCategory(@RequestParam("category") List<String> category){

@@ -1,5 +1,6 @@
 package com.example.greenpotback.Plant;
 
+import com.example.greenpotback.Post.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
     @Query("select p from Plant p where p.category.name = ?1")
     List<Plant> findAllByCategoryName(String name);
 
-    @Query("select p from Plant p inner join p.subCategories subCategories where subCategories.name in ?1")
+    @Query("select distinct p from Plant p inner join p.subCategories subCategories where subCategories.name in ?1")
     List<Plant> findAllBySubCategoriesNameIn(List<String> name);
 
     @Query("select p from Plant p inner join p.observers observers where observers.email = ?1")
@@ -24,4 +25,6 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
     @Query("select p from Plant p where p.author.id = ?1")
     List<Plant> findAllByAuthorId(Integer id);
+
+    List<Plant> findFirst5ByOrderByDateDesc();
 }

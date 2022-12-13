@@ -9,6 +9,7 @@ import * as events from "events";
 import {Calendar} from "../../models/calendar";
 import {HttpEventType} from "@angular/common/http";
 import {Plant} from "../../models/plant";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-plant-form',
@@ -19,7 +20,8 @@ export class PlantFormComponent implements OnInit {
 
   constructor(private _formBuilder: UntypedFormBuilder,
               private categoryService: CategoriesService,
-              private plantService: PlantService) { }
+              private plantService: PlantService,
+              private router: Router) { }
 
   plantAddForm = this._formBuilder.group({
     name: ['',{validators:[Validators.required,Validators.minLength(3),Validators.maxLength(255)], updateOn: 'blur'}],
@@ -144,17 +146,19 @@ export class PlantFormComponent implements OnInit {
   upload(idx: number, file: any) {
     this.progressInfos[idx] = { value: 0, fileName: file.name };
 
-    this.plantService.upload(file,this.plantId).subscribe(
-      event => {
+    this.plantService.upload(file,this.plantId).subscribe({
+      next: event =>{
         if (event.type === HttpEventType.UploadProgress) {
           if(!event.total) return;
           this.progressInfos[idx].value = Math.round(100 * event.loaded / event.total);
         }
       },
-      err => {
+      error: err => {
         this.progressInfos[idx].value = 0;
         this.errorMessage = 'Could not upload the file:' + file.name;
-      });
+      },
+      complete: () => this.router.navigate(['/plant/'+this.plantId])
+    });
   }
 
   uploadFiles() {
@@ -186,7 +190,5 @@ export class PlantFormComponent implements OnInit {
   get subCategories(){
     return this.plantAddForm.controls['subCategories']
   }
-
-
 
 }
