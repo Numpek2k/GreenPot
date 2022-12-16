@@ -13,6 +13,7 @@ import {PostContainerComponent} from "./components/post-container/post-container
 import {PostService} from "./services/post.service";
 import {PostComponent} from "./components/post/post.component";
 import {HomeComponent} from "./components/home/home.component";
+import {GeoLocComponent} from "./components/geo-loc/geo-loc.component";
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'posts',component: PostContainerComponent},
   {path: 'post/:id',component: PostComponent},
   {path: 'home',component: HomeComponent},
+  {path: 'geoloc',component: GeoLocComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
   // { path: '', component:  }
 ];

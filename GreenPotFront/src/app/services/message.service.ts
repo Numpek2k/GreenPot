@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Message} from "../models/message";
+import {MyMessage} from "../models/myMessage";
 import {BASE_URL} from "../utility/globals";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
@@ -14,7 +14,7 @@ export class MessageService {
 
   baseUrl = BASE_URL + '/message'
 
-  send(message: Message, receiver: number): void{
+  send(message: MyMessage, receiver: number): void{
     let url = this.baseUrl + '/save';
     let params = new HttpParams().set('receiver',receiver)
 
@@ -32,10 +32,10 @@ export class MessageService {
     return this.http.get<User[]>(url);
   }
 
-  getAllMessages(receiver: number): Observable<Message[]>{
+  getAllMessages(receiver: number): Observable<MyMessage[]>{
     let url = this.baseUrl + '/user-to-user-all'
     let param = new HttpParams().set('receiverId', receiver);
-    return this.http.get<Message[]>(url,{
+    return this.http.get<MyMessage[]>(url,{
       params: param
     })
   }

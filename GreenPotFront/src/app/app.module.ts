@@ -28,7 +28,10 @@ import { PostComponent } from './components/post/post.component';
 import { CardPostProfileComponent } from './components/card-post-profile/card-post-profile.component';
 import { HomeComponent } from './components/home/home.component';
 import {CommentCardHolderComponent} from "./components/comment-card-holder/comment-card-holder.component";
-// import { AgmCoreModule } from '@agm/core'
+import { AgmCoreModule } from '@agm/core';
+import { GeoLocComponent } from './components/geo-loc/geo-loc.component';
+import {StompService} from "./services/stomp.service";
+import {stompServiceFactory} from "./services/stompServiceFactory";
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import {CommentCardHolderComponent} from "./components/comment-card-holder/comme
     PostComponent,
     CommentCardHolderComponent,
     CardPostProfileComponent,
-    HomeComponent
+    HomeComponent,
+    GeoLocComponent
   ],
   imports: [
     BrowserModule,
@@ -62,16 +66,20 @@ import {CommentCardHolderComponent} from "./components/comment-card-holder/comme
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    // AgmCoreModule.forRoot({
-    //   apiKey: 'GOOGLE API KEY',
-    //   libraries: ['places']
-    // })
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAPPVaRNO0GzJJZM9PpjjtYW2STeHa9LTo',
+      libraries: ['places']
+    })
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true,
+    },
+    {
+      provide: StompService,
+      useFactory: stompServiceFactory,
     },
   ],
   bootstrap: [AppComponent]

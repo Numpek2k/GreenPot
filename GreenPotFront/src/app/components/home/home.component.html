@@ -3,8 +3,30 @@
     <div class="col-md-8">
       <img class="img-fluid" src="assets/hom.png">
     </div>
-    <div class="col-md-4 bg-warning">
-      Weather api here
+    <div class="col-md-4 bg-white  overflow-hidden">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Day</th>
+            <th>Night</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dailyData.data">
+            <td>{{getDayFromDate(data.time)}}</td>
+            <td style="white-space: nowrap"><img src="assets/weather-icon/{{data.icon}}.svg"></td>
+            <td>{{data.temperatureMax}}</td>
+            <td>{{data.temperatureMin}}</td>
+            <td style="white-space: nowrap">{{data.summary}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#weatherModal">
+        Set location
+      </button>
     </div>
   </div>
   <div class="row mt-5 border-top">
@@ -15,6 +37,28 @@
     <div class="col-md-6 mt-3 p-3">
       <h5>Latest added post:</h5>
       <app-card-post-profile *ngFor="let post of posts" [post]="post"></app-card-post-profile>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--MODAL-->
+<div class="modal fade" id="weatherModal" tabindex="-1" aria-labelledby="weatherModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="weatherModalLabel">Choose location</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-geo-loc></app-geo-loc>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>
