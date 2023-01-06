@@ -8,9 +8,14 @@
         <div class="px-3 my-1">{{message.content}}</div>
       </div>
     </ng-template>
-    <div>
-      {{watcher}}
-    </div>
+    <ng-template ngFor let-message [ngForOf]="watcher">
+      <div *ngIf="compareUser(message.sender)" class="rounded-4 bg-secondary bg-opacity-25 col-8 mt-3 shadow-sm border-top border-dark">
+        <div class="px-3 my-1 text-justify">{{message.content}}</div>
+      </div>
+      <div *ngIf="!compareUser(message.sender)" class="rounded-4 bg-light offset-4 col-8 mt-3 shadow-sm border-top">
+        <div class="px-3 my-1">{{message.content}}</div>
+      </div>
+    </ng-template>
   </div>
 
   <div class="row d-flex position-absolute bottom-0 start-0 end-0 pb-2">

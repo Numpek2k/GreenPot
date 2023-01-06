@@ -30,9 +30,13 @@ export class HomeComponent implements OnInit {
     this.plantService.getLatestPlantWithLimit().subscribe({
       next: value => this.plants = value
     })
-
     this.longitude = localStorage.getItem('longitude')
     this.latitude = localStorage.getItem('latitude')
+
+    if(this.longitude == undefined || this.latitude == undefined) {
+      this.latitude = 0
+      this.longitude = 0
+    }
 
     this.weatherService.getWeatherForecast(this.latitude,this.longitude).subscribe({
       next: value => {

@@ -5,7 +5,6 @@ import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";
 import {FormBuilder, Validators} from "@angular/forms";
 import {StompService} from "../../services/stomp.service";
-import {Message} from "@stomp/stompjs";
 import {Subscription} from "rxjs";
 
 @Component({
@@ -27,7 +26,7 @@ export class MessagesComponent implements OnInit {
   })
   messages?: MyMessage[]
   loggedIn?: User
-  watcher?: string = ''
+  watcher: MyMessage[] = []
   private subscription?: Subscription;
 
   ngOnInit(): void {
@@ -48,10 +47,12 @@ export class MessagesComponent implements OnInit {
     this.userService.getUser().subscribe(value => {
       this.loggedIn = value
       this.subscription?.unsubscribe()
-      this.watcher = ''
-      let stomp = this.stompService.watch("/topic/messages/" + this.loggedIn?.id)
+      this.watcher = []
+      let stomp = this.stompService.watch("/user/" + this.chatID(this.loggedIn?.id as number,this.id) + "/queue/reply")
       this.subscription = stomp.subscribe({
-        next: value => this.watcher += JSON.parse(value.body).content
+        next: value => {
+          this.watcher.push(JSON.parse(value.body))
+        }
       })
     })
 
@@ -84,10 +85,17 @@ export class MessagesComponent implements OnInit {
     }
     console.log( JSON.stringify(message))
     this.stompService.publish({destination:"/app/chat/"+this.loggedIn?.id+"/"+ this.id,body: JSON.stringify(message)})
+    this.messageForm.reset()
   }
 
   ngOnDestroy(){
     this.subscription?.unsubscribe()
+  }
+
+  chatID(a: number, b: number){
+    if(a > b)
+      return "chatU"+b+"U"+a;
+    return "chatU"+a+"U"+b;
   }
 
 }

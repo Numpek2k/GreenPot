@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/photos/**").permitAll()
 //                .antMatchers("/").permitAll()
-//                .anyRequest().permitAll()
+//                .anyRequest().authenticated()
                 .and()
                 .httpBasic();
 

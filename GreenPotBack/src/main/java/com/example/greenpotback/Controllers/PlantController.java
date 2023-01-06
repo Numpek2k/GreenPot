@@ -13,6 +13,7 @@ import com.example.greenpotback.Post.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,7 +46,6 @@ public class PlantController {
         for(Plant plant : plants){
             allPlants.add(plantService.collectAllData(plant));
         }
-
         return new ResponseEntity<>(allPlants,HttpStatus.OK);
     }
 

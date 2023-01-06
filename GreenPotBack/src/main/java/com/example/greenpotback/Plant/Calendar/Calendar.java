@@ -29,6 +29,7 @@ public class Calendar {
     private Date dateEnd;
 
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "plant_id")
     private Plant plant;

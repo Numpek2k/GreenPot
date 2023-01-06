@@ -1,6 +1,6 @@
 <div class="my-3">
   <div class="row ms-3" style="--bs-gutter-x: 0;">
-    <div class="card col-2 shadow message-people px-3 overflow-auto">
+    <div class="card col-md-2 col-3 shadow message-people px-3 overflow-auto">
       <ng-template ngFor let-user [ngForOf]="receivers">
         <button class="border-bottom border-0 bg-white" (click)="onButtonClick(user.id)">
           <div class="row">
@@ -17,7 +17,7 @@
 
     </div>
 
-    <div class="card offset-1 col-8 shadow px-3">
+    <div class="card offset-md-1 col-8 shadow px-3">
       <app-messages [id]="id"></app-messages>
     </div>
   </div>
