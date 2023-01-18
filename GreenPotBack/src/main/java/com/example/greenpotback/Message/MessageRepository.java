@@ -17,13 +17,6 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
             "group by comb order by maxx desc")
     List<User> findReceiverDistinctBySender(User user);
 
-//    select distinct receiver_id from message where sender_id =4 union
-//    select distinct sender_id from message as m where receiver_id = 4
-
-//    select * from "user" as u where u.id in
-//            (select distinct receiver_id from message where sender_id =4 union
-//                    select distinct sender_id from message as m where receiver_id = 4)
-
     @Query("select m from Message m where m.sender = ?1 and m.receiver = ?2 " +
             "or m.sender = ?2 and m.receiver = ?1 order by m.date")
     List<Message> findAllBySenderAndReceiver(User sender, User receiver);

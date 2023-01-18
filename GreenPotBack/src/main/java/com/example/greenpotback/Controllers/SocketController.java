@@ -26,7 +26,6 @@ public class SocketController {
     private final SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/chat/{sender}/{receiver}")
-//    @SendToUser("/topic/chat")
     public String chat(@DestinationVariable Integer sender, @DestinationVariable Integer receiver, Message message){
         User userRec = userRepository.findUserById(receiver);
         User userSend = userRepository.findUserById(sender);

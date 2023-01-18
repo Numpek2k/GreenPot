@@ -16,7 +16,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Image {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

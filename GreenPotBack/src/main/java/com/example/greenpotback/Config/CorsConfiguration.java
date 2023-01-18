@@ -1,4 +1,4 @@
-package com.example.greenpotback.Security;
+package com.example.greenpotback.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

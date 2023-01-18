@@ -8,5 +8,4 @@ export interface Post{
   date?: Date;
   authorPost?: User;
 
-
 }

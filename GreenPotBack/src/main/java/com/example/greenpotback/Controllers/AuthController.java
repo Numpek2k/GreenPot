@@ -42,10 +42,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthTokenDto> login(@RequestParam(name = "email") String email,
                                               @RequestParam(name = "password") String password){
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         email,
                         password));
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String accessToken = tokenProvider.generateAccessToken(email);
         String refreshToken = tokenProvider.generateRefreshToken(email);
@@ -76,7 +78,10 @@ public class AuthController {
             String email = tokenProvider.getEmailFromJWT(refreshToken);
             String accessToken = tokenProvider.generateAccessToken(email);
 
-            return new ResponseEntity<>(new AuthTokenDto(accessToken,SecurityConst.JWT_TOKEN_TYPE + refreshToken),HttpStatus.OK);
+            return new ResponseEntity<>(
+                    new AuthTokenDto(
+                            accessToken,SecurityConst.JWT_TOKEN_TYPE + refreshToken
+                    ),HttpStatus.OK);
         }
         else throw new RuntimeException("Refresh token missing");
     }

@@ -21,7 +21,6 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Plant {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

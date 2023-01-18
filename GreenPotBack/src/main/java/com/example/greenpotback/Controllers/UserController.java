@@ -26,6 +26,8 @@ public class UserController {
 
     @GetMapping("/getcurrent")
     public ResponseEntity<User> findCurrentUser(Principal user) {
+        if(user == null)
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         return ResponseEntity.ok().body(userServiceImp.getCurrentUser(user));
     }
 

@@ -10,4 +10,5 @@ import java.util.List;
 public interface CalendarRepository extends JpaRepository<Calendar, Integer> {
     @Query("select c from Calendar c where c.plant.id = ?1 order by c.dateStart")
     List<Calendar> findAllByPlantIdOrderByDateStart(Integer id);
+
 }
