@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Plant} from "../../models/plant";
 import {Post} from "../../models/post";
 import {PostService} from "../../services/post.service";
@@ -14,7 +14,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private postService: PostService,
               private plantService: PlantService,
-              private weatherService: WeatherService) { }
+              private weatherService: WeatherService,
+              private cd: ChangeDetectorRef) { }
 
 
   plants?: Plant[]
@@ -41,7 +42,7 @@ export class HomeComponent implements OnInit {
     this.weatherService.getWeatherForecast(this.latitude,this.longitude).subscribe({
       next: value => {
         this.dailyData = value.daily
-        console.log(this.dailyData)
+        this.cd.detectChanges()
       }
     })
   }
@@ -51,5 +52,15 @@ export class HomeComponent implements OnInit {
     let setDate = new Date(date*1000)
     return weekday[setDate.getDay()]
   }
+
+  getWeatherIcon(data: any): string {
+    if (data.weather.length > 0) {
+      const icon = data.weather[0].icon
+      return `assets/weather-icon/${icon}.svg`
+    } else {
+      return ''
+    }
+  }
+
 
 }

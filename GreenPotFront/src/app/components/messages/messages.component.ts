@@ -6,6 +6,7 @@ import {User} from "../../models/user";
 import {FormBuilder, Validators} from "@angular/forms";
 import {StompService} from "../../services/stomp.service";
 import {Subscription} from "rxjs";
+import {StompHeaders} from "@stomp/stompjs/src/stomp-headers";
 
 @Component({
   selector: 'app-messages',
@@ -30,7 +31,6 @@ export class MessagesComponent implements OnInit {
   private subscription?: Subscription;
 
   ngOnInit(): void {
-
     this.messageService.getAllMessages(this.id).subscribe({
       next: value => {
         this.messages = value
@@ -48,7 +48,15 @@ export class MessagesComponent implements OnInit {
       this.loggedIn = value
       this.subscription?.unsubscribe()
       this.watcher = []
-      let stomp = this.stompService.watch("/user/" + this.chatID(this.loggedIn?.id as number,this.id) + "/queue/reply")
+      let token = localStorage.getItem('access_token');
+      if (token === null)
+        token = ''
+      const customHeaders: StompHeaders = {
+          Authorization: token
+      };
+      let stomp = this.stompService.watch(
+        "/user/" + this.chatID(this.loggedIn?.id as number,this.id) + "/queue/reply",
+          customHeaders)
       this.subscription = stomp.subscribe({
         next: value => {
           this.watcher.push(JSON.parse(value.body))
@@ -79,11 +87,9 @@ export class MessagesComponent implements OnInit {
   }
 
   onSendMessages(){
-    console.log("hello")
     const message: MyMessage = {
       content: this.messageForm.get('content')?.value as string
     }
-    console.log( JSON.stringify(message))
     this.stompService.publish({destination:"/app/chat/"+this.loggedIn?.id+"/"+ this.id,body: JSON.stringify(message)})
     this.messageForm.reset()
   }
