@@ -15,11 +15,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of dailyData.data">
-            <td>{{getDayFromDate(data.time)}}</td>
-            <td style="white-space: nowrap"><img src="assets/weather-icon/{{data.icon}}.svg"></td>
-            <td>{{data.temperatureMax}}</td>
-            <td>{{data.temperatureMin}}</td>
+          <tr *ngFor="let data of dailyData">
+            <td>{{getDayFromDate(data.dt)}}</td>
+            <td style="white-space: nowrap"><img [src]="getWeatherIcon(data)"></td>
+            <td>{{data.temp.max}}</td>
+            <td>{{data.temp.min}}</td>
             <td>{{data.summary}}</td>
           </tr>
         </tbody>

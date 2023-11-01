@@ -67,7 +67,7 @@ import {stompServiceFactory} from "./services/stompServiceFactory";
     ReactiveFormsModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAPPVaRNO0GzJJZM9PpjjtYW2STeHa9LTo',
+      apiKey: 'AIzaSyAyA9R7skWBGZuqg_jmkWIHMO7Mr7lqVy4',
       libraries: ['places']
     })
   ],

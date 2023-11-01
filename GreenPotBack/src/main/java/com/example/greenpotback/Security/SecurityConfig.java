@@ -40,11 +40,12 @@ public class SecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeHttpRequests()
+                .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/photos/**").permitAll()
                 .antMatchers("/plant/**").permitAll()
                 .antMatchers("/post/**").permitAll()
+//                .antMatchers("/message/get/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
