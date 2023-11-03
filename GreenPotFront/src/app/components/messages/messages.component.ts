@@ -6,7 +6,6 @@ import {User} from "../../models/user";
 import {FormBuilder, Validators} from "@angular/forms";
 import {StompService} from "../../services/stomp.service";
 import {Subscription} from "rxjs";
-import {StompHeaders} from "@stomp/stompjs/src/stomp-headers";
 
 @Component({
   selector: 'app-messages',
@@ -48,15 +47,7 @@ export class MessagesComponent implements OnInit {
       this.loggedIn = value
       this.subscription?.unsubscribe()
       this.watcher = []
-      let token = localStorage.getItem('access_token');
-      if (token === null)
-        token = ''
-      const customHeaders: StompHeaders = {
-          Authorization: token
-      };
-      let stomp = this.stompService.watch(
-        "/user/" + this.chatID(this.loggedIn?.id as number,this.id) + "/queue/reply",
-          customHeaders)
+      let stomp = this.stompService.watch("/user/" + this.chatID(this.loggedIn?.id as number,this.id) + "/queue/reply")
       this.subscription = stomp.subscribe({
         next: value => {
           this.watcher.push(JSON.parse(value.body))

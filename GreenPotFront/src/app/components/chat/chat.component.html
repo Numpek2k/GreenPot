@@ -18,7 +18,7 @@
     </div>
 
     <div class="card offset-md-1 col-8 shadow px-3">
-      <app-messages [id]="id"></app-messages>
+      <app-messages *ngIf="id" [id]="id"></app-messages>
     </div>
   </div>
 </div>
